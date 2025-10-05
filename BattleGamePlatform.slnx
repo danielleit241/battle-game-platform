@@ -1,4 +1,20 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="BattleGame.Common/BattleGame.Shared.csproj" />
+  </Folder>
+  <Folder Name="/src/GameService/">
+    <Project Path="BattleGame.GameService/BattleGame.GameService.csproj" />
+  </Folder>
+  <Folder Name="/src/LeaderboardService/">
+    <Project Path="BattleGame.LeaderboardService/BattleGame.LeaderboardService.csproj" />
+  </Folder>
+  <Folder Name="/src/MatchService/">
+    <Project Path="BattleGame.MatchService/BattleGame.MatchService.csproj" />
+  </Folder>
+  <Folder Name="/src/UserService/">
+    <Project Path="BattleGame.UserService/BattleGame.UserService.csproj" />
+  </Folder>
   <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />
+  <Project Path="BattleGamePlatform.DatabaseMigrationHelpers/BattleGamePlatform.DatabaseMigrationHelpers.csproj" />
   <Project Path="BattleGamePlatform.ServiceDefaults/BattleGamePlatform.ServiceDefaults.csproj" />
 </Solution>
