@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />
+  <Project Path="BattleGamePlatform.ServiceDefaults/BattleGamePlatform.ServiceDefaults.csproj" />
+</Solution>
