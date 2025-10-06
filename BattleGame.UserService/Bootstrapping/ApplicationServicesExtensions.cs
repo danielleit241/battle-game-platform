@@ -16,6 +16,8 @@
             );
 
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<TokenService>();
 
             return builder;
         }

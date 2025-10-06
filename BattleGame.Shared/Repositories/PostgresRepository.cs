@@ -2,8 +2,8 @@
 {
     public class PostgresRepository<T> : IBaseRepository<T> where T : class, IEntity
     {
-        private readonly DbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbContext _context;
+        protected readonly DbSet<T> _dbSet;
         public PostgresRepository(DbContext context)
         {
             _context = context;

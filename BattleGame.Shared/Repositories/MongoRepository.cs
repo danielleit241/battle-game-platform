@@ -2,8 +2,8 @@
 {
     public class MongoRepository<T> : IBaseRepository<T> where T : IEntity
     {
-        private readonly IMongoCollection<T> _collection;
-        private readonly FilterDefinitionBuilder<T> _filterBuilder = Builders<T>.Filter;
+        protected readonly IMongoCollection<T> _collection;
+        protected readonly FilterDefinitionBuilder<T> _filterBuilder = Builders<T>.Filter;
 
         public MongoRepository(IMongoDatabase database, string collectionName)
         {

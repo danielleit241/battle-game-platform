@@ -34,7 +34,7 @@
             var role = dto.AsRole();
             await repository.AddAsync(role);
 
-            var responseDto = role.AsDto();
+            var responseDto = role.AsRoleDto();
             return TypedResults.Ok(ApiResponse<RoleDto>.SuccessResponse(responseDto, metadata: DateTime.UtcNow));
         }
 
@@ -45,7 +45,7 @@
             {
                 return TypedResults.NotFound();
             }
-            var responseDtos = roles.Select(r => r.AsDto());
+            var responseDtos = roles.Select(r => r.AsRoleDto());
             return TypedResults.Ok(ApiResponse<IEnumerable<RoleDto>>.SuccessResponse(responseDtos));
         }
     }
