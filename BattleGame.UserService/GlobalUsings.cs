@@ -8,6 +8,6 @@ global using BattleGame.UserService.DataAcessLayer.Repositories.Abstractions;
 global using BattleGame.UserService.DataAcessLayer.Repositories.Implementations;
 global using BattleGame.UserService.Dtos;
 global using BattleGamePlatform.DatabaseMigrationHelpers;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
-

@@ -30,7 +30,7 @@
             var gamedb = postgres.AddDatabase("gameservice", "gamedb");
             var matchdb = mongo.AddDatabase("matchservice", "matchdb");
 
-            var userservice = builder.AddProject<Projects.BattleGame_UserService>("battlegame-userservice")
+            var userservice = builder.AddProject<Projects.BattleGame_UserService_Api>("battlegame-userservice")
                 .WithReference(userdb)
                 .WaitFor(postgres)
                 .WithHttpEndpoint(5000, name: "userservice-http");

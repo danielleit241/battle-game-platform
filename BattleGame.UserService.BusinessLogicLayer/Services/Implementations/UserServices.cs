@@ -37,7 +37,8 @@
             {
                 return ApiResponse<TokenDto>.FailureResponse("Password is incorrect.");
             }
-            var token = tokenService.GenerateAccessToken(user);
+            var userWithRole = await repository.GetUserIncludeRoleAsync(user.Id);
+            var token = tokenService.GenerateAccessToken(userWithRole);
             return ApiResponse<TokenDto>.SuccessResponse(new TokenDto(token), "Login successful");
         }
 
@@ -46,6 +47,7 @@
             var role = await roleRepository.GetAsync(r => r.Id == dto.RoleId);
             if (role is null)
                 return ApiResponse<UserDto>.FailureResponse("Role does not exist");
+
             var existingUser = await repository.GetAsync(u => u.Username == dto.UserName);
             if (existingUser is not null)
                 return ApiResponse<UserDto>.FailureResponse("Username already exists");

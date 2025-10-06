@@ -11,8 +11,8 @@
         }
         public static RouteGroupBuilder MapUserApi(this RouteGroupBuilder group)
         {
-            group.MapGet("", GetAllUsers).WithName("GetAllUsers");
-            group.MapGet("/{id:guid}", GetUserById).WithName("GetUserById");
+            group.MapGet("", GetAllUsers).WithName("GetAllUsers").RequireAuthorization();
+            group.MapGet("/{id:guid}", GetUserById).WithName("GetUserById").RequireAuthorization();
             group.MapPost("/register", RegisterUser).WithName("CreateUser");
             group.MapPost("/login", LoginUser).WithName("LoginUser");
             //group.MapPut("/{id:guid}", UpdateUser).WithName("UpdateUser");
