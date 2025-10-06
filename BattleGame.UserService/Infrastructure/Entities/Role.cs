@@ -1,6 +1,4 @@
-﻿using BattleGame.Shared;
-
-namespace BattleGame.UserService.Infrastructure.Entities
+﻿namespace BattleGame.UserService.Infrastructure.Entities
 {
     public class Role : IEntity
     {

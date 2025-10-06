@@ -1,7 +1,4 @@
-﻿using BattleGame.UserService.Infrastructure.Entities;
-using Microsoft.EntityFrameworkCore;
-
-namespace BattleGame.UserService.Infrastructure.Data
+﻿namespace BattleGame.UserService.Infrastructure.Data
 {
     public class UserDbContext : DbContext
     {

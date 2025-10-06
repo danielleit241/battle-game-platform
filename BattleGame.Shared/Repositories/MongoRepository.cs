@@ -1,8 +1,4 @@
-﻿using BattleGame.Shared.Abstractions;
-using MongoDB.Driver;
-using System.Linq.Expressions;
-
-namespace BattleGame.Shared.MongoDb
+﻿namespace BattleGame.Shared.MongoDb
 {
     public class MongoRepository<T> : IBaseRepository<T> where T : IEntity
     {

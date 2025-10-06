@@ -1,8 +1,4 @@
-﻿using BattleGame.Shared.Abstractions;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
-namespace BattleGame.Shared.Repositories
+﻿namespace BattleGame.Shared.Repositories
 {
     public class PostgresRepository<T> : IBaseRepository<T> where T : class, IEntity
     {

@@ -1,0 +1,17 @@
+﻿global using BattleGame.Shared;
+global using BattleGame.Shared.Abstractions;
+global using BattleGame.Shared.Repositories;
+global using BattleGame.UserService.Apis;
+global using BattleGame.UserService.Bootstrapping;
+global using BattleGame.UserService.Dtos;
+global using BattleGame.UserService.Infrastructure.Data;
+global using BattleGame.UserService.Infrastructure.Entities;
+global using BattleGame.UserService.Repositories;
+global using BattleGamePlatform.DatabaseMigrationHelpers;
+global using Microsoft.AspNetCore.Http.HttpResults;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using System.ComponentModel.DataAnnotations;
+
+

@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="BattleGame.Common/BattleGame.Shared.csproj" />
+    <Project Path="BattleGame.Shared/BattleGame.Shared.csproj" />
   </Folder>
   <Folder Name="/src/GameService/">
     <Project Path="BattleGame.GameService/BattleGame.GameService.csproj" />

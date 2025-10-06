@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace BattleGame.Shared.Abstractions
+﻿namespace BattleGame.Shared.Abstractions
 {
     public interface IBaseRepository<T> where T : IEntity
     {

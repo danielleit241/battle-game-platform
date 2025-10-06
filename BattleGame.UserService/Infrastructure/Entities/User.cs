@@ -1,7 +1,4 @@
-﻿using BattleGame.Shared;
-using System.ComponentModel.DataAnnotations;
-
-namespace BattleGame.UserService.Infrastructure.Entities
+﻿namespace BattleGame.UserService.Infrastructure.Entities
 {
     public class User : IEntity
     {

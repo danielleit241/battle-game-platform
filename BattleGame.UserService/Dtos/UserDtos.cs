@@ -1,0 +1,3 @@
+﻿namespace BattleGame.UserService.Dtos
+{
+}

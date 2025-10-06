@@ -1,6 +1,6 @@
-@BattleGame.UserService_HostAddress = http://localhost:5213
+@BattleGame.UserService_HostAddress = http://localhost:5000
 
-GET {{BattleGame.UserService_HostAddress}}/weatherforecast/
+GET {{BattleGame.UserService_HostAddress}}/api/v1/users/roles
 Accept: application/json
 
 ###
