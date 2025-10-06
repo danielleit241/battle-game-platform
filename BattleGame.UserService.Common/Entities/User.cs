@@ -1,4 +1,7 @@
-﻿namespace BattleGame.UserService.DataAcessLayer.Infrastructure.Entities
+﻿using BattleGame.Shared.Abstractions;
+using System.ComponentModel.DataAnnotations;
+
+namespace BattleGame.UserService.Common.Entities
 {
     public class User : IEntity
     {

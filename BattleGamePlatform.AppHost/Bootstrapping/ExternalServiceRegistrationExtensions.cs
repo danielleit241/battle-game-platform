@@ -32,7 +32,9 @@
 
             var userservice = builder.AddProject<Projects.BattleGame_UserService_Api>("battlegame-userservice")
                 .WithReference(userdb)
+                .WithReference(rabbitMq)
                 .WaitFor(postgres)
+                .WaitFor(rabbitMq)
                 .WithHttpEndpoint(5000, name: "userservice-http");
 
             var gameservice = builder.AddProject<Projects.BattleGame_GameService>("battlegame-gameservice")

@@ -1,3 +1,5 @@
+using BattleGamePlatform.ServiceDefaults;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();

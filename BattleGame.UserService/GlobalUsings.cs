@@ -1,12 +1,12 @@
-﻿global using BattleGame.Shared;
-global using BattleGame.UserService.Apis;
-global using BattleGame.UserService.Bootstrapping;
+﻿global using BattleGame.MessageBus.Abstractions;
+global using BattleGame.MessageBus.RabbitMq;
+global using BattleGame.Shared;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Implementations;
+global using BattleGame.UserService.Common.Dtos;
 global using BattleGame.UserService.DataAcessLayer.Infrastructure.Data;
 global using BattleGame.UserService.DataAcessLayer.Repositories.Abstractions;
 global using BattleGame.UserService.DataAcessLayer.Repositories.Implementations;
-global using BattleGame.UserService.Dtos;
 global using BattleGamePlatform.DatabaseMigrationHelpers;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Mvc;

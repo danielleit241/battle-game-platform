@@ -1,5 +1,4 @@
-﻿
-namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
+﻿namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
 {
     public class RoleServices(IRoleRepository repository) : IRoleServices
     {

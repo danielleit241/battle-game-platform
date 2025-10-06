@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService.Apis
+﻿namespace BattleGame.UserService.Api.Apis
 {
     public static class RoleApi
     {

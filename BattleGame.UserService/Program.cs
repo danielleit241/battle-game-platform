@@ -1,3 +1,7 @@
+using BattleGame.UserService.Api.Apis;
+using BattleGame.UserService.Api.Bootstrapping;
+using BattleGamePlatform.ServiceDefaults;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddApplicationServices();

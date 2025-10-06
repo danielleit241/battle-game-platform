@@ -1,4 +1,8 @@
-﻿namespace BattleGame.UserService.Bootstrapping
+﻿using BattleGame.MessageBus.Abstractions;
+using BattleGame.MessageBus.RabbitMq;
+using BattleGamePlatform.ServiceDefaults;
+
+namespace BattleGame.UserService.Api.Bootstrapping
 {
     public static class ApplicationServicesExtensions
     {
@@ -13,6 +17,14 @@
                 {
                     options.UseNpgsql(builder => builder.MigrationsAssembly(typeof(UserDbContext).Assembly.FullName));
                 }
+            );
+
+            builder.Services.AddSingleton<IMessagePublisher>(sp =>
+                new RabbitMqPublisher(
+                    connectionString: builder.Configuration.GetConnectionString("RabbitMq")
+                            ?? throw new InvalidOperationException("RabbitMq connection string not configured"),
+                    logger: sp.GetRequiredService<ILogger<RabbitMqPublisher>>()
+                    )
             );
 
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();

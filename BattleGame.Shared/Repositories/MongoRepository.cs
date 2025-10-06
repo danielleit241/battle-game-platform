@@ -1,4 +1,4 @@
-﻿namespace BattleGame.Shared.MongoDb
+﻿namespace BattleGame.Shared.Repositories
 {
     public class MongoRepository<T> : IBaseRepository<T> where T : IEntity
     {

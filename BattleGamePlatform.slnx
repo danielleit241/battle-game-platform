@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="BattleGame.Massaging/BattleGame.MessageBus.csproj" Id="10af7b09-8079-4031-8394-2a29d83bf0c5" />
     <Project Path="BattleGame.Shared/BattleGame.Shared.csproj" />
   </Folder>
   <Folder Name="/src/GameService/">
@@ -13,6 +14,7 @@
   </Folder>
   <Folder Name="/src/UserService/">
     <Project Path="BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" Id="5bae4b63-5967-4acd-9637-afb9a43f9544" />
+    <Project Path="BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" Id="72e8501d-de34-4024-87aa-658451afe9d9" />
     <Project Path="BattleGame.UserService.DataAcessLayer/BattleGame.UserService.DataAcessLayer.csproj" Id="11f69b11-062b-4264-afc0-898d96b6ce85" />
     <Project Path="BattleGame.UserService/BattleGame.UserService.Api.csproj" />
   </Folder>

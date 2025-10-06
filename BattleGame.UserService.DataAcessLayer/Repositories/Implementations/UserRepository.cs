@@ -1,4 +1,5 @@
-﻿namespace BattleGame.UserService.DataAcessLayer.Repositories.Implementations
+﻿
+namespace BattleGame.UserService.DataAcessLayer.Repositories.Implementations
 {
     public class UserRepository : PostgresRepository<User>, IUserRepository
     {

@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService.Bootstrapping
+﻿namespace BattleGame.UserService.Common
 {
     public static class MappingExtensions
     {
@@ -18,7 +18,7 @@
             => new()
             {
                 Id = Guid.NewGuid(),
-                Username = dto.UserName.Trim(),
+                Username = dto.Username.Trim(),
                 Email = dto.Email?.Trim().ToLower() ?? "",
                 PasswordHash = new PasswordHasher<User>().HashPassword(null!, dto.Password),
                 RoleId = dto.RoleId,

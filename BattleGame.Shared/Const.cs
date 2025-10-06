@@ -6,5 +6,6 @@
         public const string GameDatabase = "gameservice";
         public const string MatchDatabase = "matchservice";
         public const string LeaderboardDatabase = "leaderboardservice";
+        public const string RabbitMq = "rabbitmq";
     }
 }

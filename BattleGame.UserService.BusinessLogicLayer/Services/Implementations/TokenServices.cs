@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService
+﻿namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
 {
     public class TokenServices : ITokenServices
     {

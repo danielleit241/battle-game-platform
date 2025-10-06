@@ -3,7 +3,8 @@
     public class UserServices(
         IUserRepository repository,
         IRoleRepository roleRepository,
-        ITokenServices tokenService) : IUserServices
+        ITokenServices tokenService,
+        IMessagePublisher publisher) : IUserServices
     {
         public async Task<ApiResponse<IReadOnlyCollection<UserDto>>> GetAllUsersAsync()
         {
@@ -38,7 +39,7 @@
                 return ApiResponse<TokenDto>.FailureResponse("Password is incorrect.");
             }
             var userWithRole = await repository.GetUserIncludeRoleAsync(user.Id);
-            var token = tokenService.GenerateAccessToken(userWithRole);
+            var token = tokenService.GenerateAccessToken(userWithRole!);
             return ApiResponse<TokenDto>.SuccessResponse(new TokenDto(token), "Login successful");
         }
 
@@ -48,12 +49,21 @@
             if (role is null)
                 return ApiResponse<UserDto>.FailureResponse("Role does not exist");
 
-            var existingUser = await repository.GetAsync(u => u.Username == dto.UserName);
+            var existingUser = await repository.GetAsync(u => u.Username == dto.Username);
             if (existingUser is not null)
                 return ApiResponse<UserDto>.FailureResponse("Username already exists");
 
             var user = dto.AsUser();
             await repository.AddAsync(user);
+
+            _ = publisher.Publish("user.created", new UserCreatedEvent
+            (
+                Id: user.Id,
+                Username: user.Username,
+                Email: user.Email,
+                RoleId: user.RoleId,
+                CreatedAt: user.CreatedAt
+            ));
 
             var userDto = user.AsUserDto();
             return ApiResponse<UserDto>.SuccessResponse(userDto, "User registered successfully");
