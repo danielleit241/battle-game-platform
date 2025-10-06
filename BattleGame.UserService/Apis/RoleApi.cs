@@ -19,34 +19,42 @@
             group.MapPost("", CreateRole)
                 .WithName("Create role");
 
+            group.MapDelete("/{id:guid}", DeleteRole)
+                .WithName("Delete role");
+
             return group;
         }
 
-        private static async Task<Results<Ok<ApiResponse<RoleDto>>, NotFound>> CreateRole(
-            [FromBody] CreateRoleDto dto,
-            IRoleRepository repository)
+        private static async Task<IResult> DeleteRole(Guid id, IRoleServices service)
         {
-            if (dto is null)
+            var response = await service.DeleteRoleAsync(id);
+            if (!response.IsSuccess)
             {
-                return TypedResults.NotFound();
+                return TypedResults.BadRequest(response);
             }
-
-            var role = dto.AsRole();
-            await repository.AddAsync(role);
-
-            var responseDto = role.AsRoleDto();
-            return TypedResults.Ok(ApiResponse<RoleDto>.SuccessResponse(responseDto, metadata: DateTime.UtcNow));
+            return TypedResults.Ok(response);
         }
 
-        private static async Task<Results<Ok<ApiResponse<IEnumerable<RoleDto>>>, NotFound>> GetAllRoles(IRoleRepository repository)
+        private static async Task<IResult> CreateRole(
+            [FromBody] CreateRoleDto dto,
+            IRoleServices service)
         {
-            var roles = await repository.GetAllAsync();
-            if (roles is null)
+            var response = await service.CreateRoleAsync(dto);
+            if (!response.IsSuccess)
             {
-                return TypedResults.NotFound();
+                return TypedResults.BadRequest(response);
             }
-            var responseDtos = roles.Select(r => r.AsRoleDto());
-            return TypedResults.Ok(ApiResponse<IEnumerable<RoleDto>>.SuccessResponse(responseDtos));
+            return TypedResults.Ok(response);
+        }
+
+        private static async Task<IResult> GetAllRoles(IRoleServices service)
+        {
+            var response = await service.GetAllRolesAsync();
+            if (!response.IsSuccess)
+            {
+                return TypedResults.NotFound(response);
+            }
+            return TypedResults.Ok(response);
         }
     }
 }

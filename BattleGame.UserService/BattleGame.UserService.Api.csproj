@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
 		<PrivateAssets>all</PrivateAssets>
@@ -17,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BattleGame.Shared\BattleGame.Shared.csproj" />
+    <ProjectReference Include="..\BattleGame.UserService.BusinessLogicLayer\BattleGame.UserService.BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.DatabaseMigrationHelpers\BattleGamePlatform.DatabaseMigrationHelpers.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.ServiceDefaults\BattleGamePlatform.ServiceDefaults.csproj" />
   </ItemGroup>

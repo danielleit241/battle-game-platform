@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace BattleGame.UserService.Bootstrapping
+﻿namespace BattleGame.UserService.Bootstrapping
 {
     public static class MappingExtensions
     {

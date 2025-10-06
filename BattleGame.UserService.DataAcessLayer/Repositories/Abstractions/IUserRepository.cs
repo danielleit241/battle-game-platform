@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService.Repositories
+﻿namespace BattleGame.UserService.DataAcessLayer.Repositories.Abstractions
 {
     public interface IUserRepository : IBaseRepository<User>
     {

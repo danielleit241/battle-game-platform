@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService.Infrastructure.Entities
+﻿namespace BattleGame.UserService.DataAcessLayer.Infrastructure.Entities
 {
     public class Role : IEntity
     {

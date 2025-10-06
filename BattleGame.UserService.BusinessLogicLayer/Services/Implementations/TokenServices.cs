@@ -1,10 +1,10 @@
 ﻿namespace BattleGame.UserService
 {
-    public class TokenService
+    public class TokenServices : ITokenServices
     {
         private readonly IConfiguration _configuration;
 
-        public TokenService(IConfiguration configuration)
+        public TokenServices(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -29,9 +29,9 @@
         {
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Role, user.Role.Name)
+                    new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new(ClaimTypes.Name, user.Username),
+                    new(ClaimTypes.Role, user.Role.Name)
                 };
             return claims;
         }

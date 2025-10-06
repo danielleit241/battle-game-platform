@@ -1,0 +1,11 @@
+﻿global using BattleGame.Shared;
+global using BattleGame.UserService.Bootstrapping;
+global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
+global using BattleGame.UserService.DataAcessLayer.Infrastructure.Entities;
+global using BattleGame.UserService.DataAcessLayer.Repositories.Abstractions;
+global using BattleGame.UserService.Dtos;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.IdentityModel.Tokens;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;

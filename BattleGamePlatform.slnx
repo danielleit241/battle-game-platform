@@ -12,7 +12,9 @@
     <Project Path="BattleGame.MatchService/BattleGame.MatchService.csproj" />
   </Folder>
   <Folder Name="/src/UserService/">
-    <Project Path="BattleGame.UserService/BattleGame.UserService.csproj" />
+    <Project Path="BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" Id="5bae4b63-5967-4acd-9637-afb9a43f9544" />
+    <Project Path="BattleGame.UserService.DataAcessLayer/BattleGame.UserService.DataAcessLayer.csproj" Id="11f69b11-062b-4264-afc0-898d96b6ce85" />
+    <Project Path="BattleGame.UserService/BattleGame.UserService.Api.csproj" />
   </Folder>
   <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />
   <Project Path="BattleGamePlatform.DatabaseMigrationHelpers/BattleGamePlatform.DatabaseMigrationHelpers.csproj" />

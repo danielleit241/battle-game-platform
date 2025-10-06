@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService.Infrastructure.Data
+﻿namespace BattleGame.UserService.DataAcessLayer.Infrastructure.Data
 {
     public class UserDbContext : DbContext
     {
