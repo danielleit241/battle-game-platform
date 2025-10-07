@@ -1,4 +1,4 @@
-﻿namespace BattleGame.Shared.Abstractions
+﻿namespace BattleGame.Shared.Database.Abstractions
 {
     public interface IEntity
     {

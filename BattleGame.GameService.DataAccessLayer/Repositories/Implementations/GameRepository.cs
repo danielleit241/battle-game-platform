@@ -1,0 +1,20 @@
+﻿using BattleGame.GameService.Common.Entities;
+using BattleGame.GameService.DataAccessLayer.Infrastructure.Data;
+using BattleGame.GameService.DataAccessLayer.Repositories.Abstractions;
+using BattleGame.Shared.Database.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace BattleGame.GameService.DataAccessLayer.Repositories.Implementations
+{
+    public class GameRepository : PostgresRepository<Game>, IGameRepository
+    {
+        public GameRepository(GameServiceDbContext context) : base(context)
+        {
+        }
+
+        public async Task<Game?> GetByNameAsync(string name)
+        {
+            return await _dbSet.FirstOrDefaultAsync(g => g.Name == name);
+        }
+    }
+}

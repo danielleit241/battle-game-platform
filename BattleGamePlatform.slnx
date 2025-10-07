@@ -4,6 +4,9 @@
     <Project Path="BattleGame.Shared/BattleGame.Shared.csproj" />
   </Folder>
   <Folder Name="/src/GameService/">
+    <Project Path="BattleGame.GameService.BusinessLogicLayer/BattleGame.GameService.BusinessLogicLayer.csproj" Id="7c355267-5c8a-4155-af79-62dcadde80fe" />
+    <Project Path="BattleGame.GameService.Common/BattleGame.GameService.Common.csproj" Id="a81fe6f0-ea9a-4541-9099-83e2bc7e65e4" />
+    <Project Path="BattleGame.GameService.DataAccessLayer/BattleGame.GameService.DataAccessLayer.csproj" Id="a69a5527-36af-4eca-8e6d-98c3d535c3b5" />
     <Project Path="BattleGame.GameService/BattleGame.GameService.csproj" />
   </Folder>
   <Folder Name="/src/LeaderboardService/">
@@ -13,10 +16,10 @@
     <Project Path="BattleGame.MatchService/BattleGame.MatchService.csproj" />
   </Folder>
   <Folder Name="/src/UserService/">
+    <Project Path="BattleGame.UserService.Api/BattleGame.UserService.Api.csproj" />
     <Project Path="BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" Id="5bae4b63-5967-4acd-9637-afb9a43f9544" />
     <Project Path="BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" Id="72e8501d-de34-4024-87aa-658451afe9d9" />
     <Project Path="BattleGame.UserService.DataAcessLayer/BattleGame.UserService.DataAcessLayer.csproj" Id="11f69b11-062b-4264-afc0-898d96b6ce85" />
-    <Project Path="BattleGame.UserService.Api/BattleGame.UserService.Api.csproj" />
   </Folder>
   <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />
   <Project Path="BattleGamePlatform.DatabaseMigrationHelpers/BattleGamePlatform.DatabaseMigrationHelpers.csproj" />

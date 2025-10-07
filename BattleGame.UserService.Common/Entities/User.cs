@@ -1,4 +1,4 @@
-﻿using BattleGame.Shared.Abstractions;
+﻿using BattleGame.Shared.Database.Abstractions;
 using System.ComponentModel.DataAnnotations;
 
 namespace BattleGame.UserService.Common.Entities

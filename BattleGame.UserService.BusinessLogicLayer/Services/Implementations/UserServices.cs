@@ -1,4 +1,6 @@
-﻿namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
+﻿using BattleGame.Shared.Common;
+
+namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
 {
     public class UserServices(
         IUserRepository repository,

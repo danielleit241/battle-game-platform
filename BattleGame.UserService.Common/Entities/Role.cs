@@ -1,4 +1,6 @@
-﻿namespace BattleGame.UserService.Common.Entities
+﻿using BattleGame.Shared.Database.Abstractions;
+
+namespace BattleGame.UserService.Common.Entities
 {
     public class Role : IEntity
     {

@@ -34,29 +34,25 @@
                 .WithReference(userdb)
                 .WithReference(rabbitMq)
                 .WaitFor(postgres)
-                .WaitFor(rabbitMq)
-                .WithHttpEndpoint(5000, name: "userservice-http");
+                .WaitFor(rabbitMq);
 
             var gameservice = builder.AddProject<Projects.BattleGame_GameService>("battlegame-gameservice")
                 .WithReference(gamedb)
                 .WithReference(rabbitMq)
                 .WaitFor(postgres)
-                .WaitFor(rabbitMq)
-                .WithHttpEndpoint(5001, name: "gameservice-http");
+                .WaitFor(rabbitMq);
 
             var matchservice = builder.AddProject<Projects.BattleGame_MatchService>("battlegame-matchservice")
                 .WithReference(matchdb)
                 .WithReference(rabbitMq)
                 .WaitFor(mongo)
-                .WaitFor(rabbitMq)
-                .WithHttpEndpoint(5002, name: "matchservice-http");
+                .WaitFor(rabbitMq);
 
             var leaderboardservice = builder.AddProject<Projects.BattleGame_LeaderboardService>("battlegame-leaderboardservice")
                 .WithReference(redis)
                 .WithReference(rabbitMq)
                 .WaitFor(redis)
-                .WaitFor(rabbitMq)
-                .WithHttpEndpoint(5003, name: "leaderboardservice-http");
+                .WaitFor(rabbitMq);
 
             var gateway = builder.AddYarp("gateway")
                 .WithHostPort(8080)

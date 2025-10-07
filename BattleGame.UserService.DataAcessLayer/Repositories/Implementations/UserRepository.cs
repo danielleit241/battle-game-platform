@@ -1,4 +1,5 @@
-﻿
+﻿using BattleGame.Shared.Database.Repositories;
+
 namespace BattleGame.UserService.DataAcessLayer.Repositories.Implementations
 {
     public class UserRepository : PostgresRepository<User>, IUserRepository

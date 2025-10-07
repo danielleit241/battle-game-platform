@@ -1,3 +1,4 @@
+using BattleGame.Shared.Jwt;
 using BattleGame.UserService.Api.Apis;
 using BattleGame.UserService.Api.Bootstrapping;
 using BattleGamePlatform.ServiceDefaults;

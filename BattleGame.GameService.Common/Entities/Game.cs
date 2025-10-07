@@ -1,0 +1,14 @@
+﻿using BattleGame.Shared.Database.Abstractions;
+
+namespace BattleGame.GameService.Common.Entities
+{
+    public class Game : IEntity
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int MaxPlayers { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
+}

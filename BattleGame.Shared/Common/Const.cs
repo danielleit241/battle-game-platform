@@ -1,4 +1,4 @@
-﻿namespace BattleGame.Shared
+﻿namespace BattleGame.Shared.Common
 {
     public class Const
     {

@@ -1,5 +1,4 @@
-﻿using BattleGame.MessageBus.Abstractions;
-using BattleGame.MessageBus.RabbitMq;
+﻿using BattleGame.Shared.Common;
 using BattleGamePlatform.ServiceDefaults;
 
 namespace BattleGame.UserService.Api.Bootstrapping
@@ -37,42 +36,5 @@ namespace BattleGame.UserService.Api.Bootstrapping
             return builder;
         }
 
-        public static IServiceCollection AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    var secretKey = configuration["Authentication:Jwt:Key"] ?? throw new InvalidOperationException("JWT SecretKey not configured");
-
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-                            System.Text.Encoding.ASCII.GetBytes(secretKey)),
-                        ValidateLifetime = true,
-                        ValidateAudience = false,
-                        ValidateIssuer = false
-                    };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnAuthenticationFailed = context =>
-                        {
-                            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-                            logger.LogWarning("JWT Authentication failed: {Exception}", context.Exception?.Message);
-                            return Task.CompletedTask;
-                        },
-                        OnTokenValidated = context =>
-                        {
-                            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-                            logger.LogDebug("JWT Token validated for user: {UserId}",
-                                context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
-                            return Task.CompletedTask;
-                        }
-                    };
-                });
-            services.AddAuthorization();
-            return services;
-        }
     }
 }

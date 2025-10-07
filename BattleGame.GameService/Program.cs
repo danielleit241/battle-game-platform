@@ -1,47 +1,55 @@
+using BattleGame.GameService.Apis;
+using BattleGame.GameService.BusinessLogicLayer.Services.Abstractions;
+using BattleGame.GameService.BusinessLogicLayer.Services.Implementations;
+using BattleGame.GameService.DataAccessLayer.Infrastructure.Data;
+using BattleGame.GameService.DataAccessLayer.Repositories.Abstractions;
+using BattleGame.GameService.DataAccessLayer.Repositories.Implementations;
+using BattleGame.MessageBus.Abstractions;
+using BattleGame.MessageBus.RabbitMq;
+using BattleGame.Shared.Common;
+using BattleGame.Shared.Jwt;
+using BattleGamePlatform.DatabaseMigrationHelpers;
 using BattleGamePlatform.ServiceDefaults;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.AddNpgsqlDbContext<GameServiceDbContext>(
+    Const.GameDatabase,
+    configureDbContextOptions: options =>
+    {
+        options.UseNpgsql(builder => builder.MigrationsAssembly(typeof(GameServiceDbContext).Assembly.FullName));
+    }
+);
+
+builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<GetClaims>();
+builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IGameServices, GameServices>();
+builder.Services.AddSingleton<IMessagePublisher>(sp =>
+    new RabbitMqPublisher(
+        connectionString: builder.Configuration.GetConnectionString("RabbitMq")
+                ?? throw new InvalidOperationException("RabbitMq connection string not configured"),
+        logger: sp.GetRequiredService<ILogger<RabbitMqPublisher>>()
+        )
+);
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+app.MapGameApi();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+await app.MigrateDbContextAsync<GameServiceDbContext>();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
