@@ -1,6 +1,4 @@
-﻿using BattleGame.Shared.Database.Abstractions;
-
-namespace BattleGame.GameService.Common.Entities
+﻿namespace BattleGame.GameService.Common.Entities
 {
     public class Game : IEntity
     {

@@ -1,7 +1,4 @@
-﻿using BattleGame.GameService.Common.Dtos;
-using BattleGame.Shared.Common;
-
-namespace BattleGame.GameService.BusinessLogicLayer.Services.Abstractions
+﻿namespace BattleGame.GameService.BusinessLogicLayer.Services.Abstractions
 {
     public interface IGameServices
     {

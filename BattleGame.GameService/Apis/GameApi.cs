@@ -1,9 +1,4 @@
-﻿
-using BattleGame.GameService.BusinessLogicLayer.Services.Abstractions;
-using BattleGame.GameService.Common.Dtos;
-using BattleGame.Shared.Jwt;
-
-namespace BattleGame.GameService.Apis
+﻿namespace BattleGame.GameService.Apis
 {
     public static class GameApi
     {

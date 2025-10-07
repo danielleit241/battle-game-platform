@@ -1,6 +1,4 @@
-﻿using BattleGame.UserService.Common.Dtos;
-
-namespace BattleGame.UserService.Api.Apis
+﻿namespace BattleGame.UserService.Api.Apis
 {
     public static class UserApi
     {

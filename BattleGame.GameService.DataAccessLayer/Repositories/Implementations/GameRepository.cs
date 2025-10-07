@@ -1,10 +1,4 @@
-﻿using BattleGame.GameService.Common.Entities;
-using BattleGame.GameService.DataAccessLayer.Infrastructure.Data;
-using BattleGame.GameService.DataAccessLayer.Repositories.Abstractions;
-using BattleGame.Shared.Database.Repositories;
-using Microsoft.EntityFrameworkCore;
-
-namespace BattleGame.GameService.DataAccessLayer.Repositories.Implementations
+﻿namespace BattleGame.GameService.DataAccessLayer.Repositories.Implementations
 {
     public class GameRepository : PostgresRepository<Game>, IGameRepository
     {

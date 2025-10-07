@@ -1,7 +1,4 @@
-﻿using BattleGame.Shared.Common;
-using BattleGamePlatform.ServiceDefaults;
-
-namespace BattleGame.UserService.Api.Bootstrapping
+﻿namespace BattleGame.UserService.Api.Bootstrapping
 {
     public static class ApplicationServicesExtensions
     {
@@ -10,21 +7,9 @@ namespace BattleGame.UserService.Api.Bootstrapping
             builder.AddServiceDefaults();
             builder.Services.AddOpenApi();
 
-            builder.AddNpgsqlDbContext<UserDbContext>(
-                Const.UserDatabase,
-                configureDbContextOptions: options =>
-                {
-                    options.UseNpgsql(builder => builder.MigrationsAssembly(typeof(UserDbContext).Assembly.FullName));
-                }
-            );
-
-            builder.Services.AddSingleton<IMessagePublisher>(sp =>
-                new RabbitMqPublisher(
-                    connectionString: builder.Configuration.GetConnectionString("RabbitMq")
-                            ?? throw new InvalidOperationException("RabbitMq connection string not configured"),
-                    logger: sp.GetRequiredService<ILogger<RabbitMqPublisher>>()
-                    )
-            );
+            builder.AddNpgsqlDb<UserDbContext>(Const.UserDatabase);
+            builder.AddMessageBus();
+            builder.AddJwtConfiguration(builder.Configuration);
 
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();

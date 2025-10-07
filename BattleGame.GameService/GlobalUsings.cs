@@ -1,0 +1,13 @@
+﻿global using BattleGame.GameService.Apis;
+global using BattleGame.GameService.BusinessLogicLayer.Services.Abstractions;
+global using BattleGame.GameService.BusinessLogicLayer.Services.Implementations;
+global using BattleGame.GameService.Common.Dtos;
+global using BattleGame.GameService.DataAccessLayer.Infrastructure.Data;
+global using BattleGame.GameService.DataAccessLayer.Repositories.Abstractions;
+global using BattleGame.GameService.DataAccessLayer.Repositories.Implementations;
+global using BattleGame.GameService.Infrastructure;
+global using BattleGame.Shared;
+global using BattleGame.Shared.Common;
+global using BattleGame.Shared.Jwt;
+global using BattleGamePlatform.DatabaseMigrationHelpers;
+global using BattleGamePlatform.ServiceDefaults;

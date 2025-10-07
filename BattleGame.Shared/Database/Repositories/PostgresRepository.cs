@@ -1,6 +1,4 @@
-﻿using BattleGame.Shared.Database.Abstractions;
-
-namespace BattleGame.Shared.Database.Repositories
+﻿namespace BattleGame.Shared.Database.Repositories
 {
     public class PostgresRepository<T> : IBaseRepository<T> where T : class, IEntity
     {

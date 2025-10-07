@@ -1,6 +1,4 @@
-﻿using BattleGame.GameService.Common.Dtos;
-
-namespace BattleGame.GameService.Common
+﻿namespace BattleGame.GameService.Common
 {
     public static class MappingExtensions
     {

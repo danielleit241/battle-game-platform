@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-
-namespace BattleGame.Shared.Jwt
+﻿namespace BattleGame.Shared.Jwt
 {
     public class GetClaims(IHttpContextAccessor httpContextAccessor)
     {

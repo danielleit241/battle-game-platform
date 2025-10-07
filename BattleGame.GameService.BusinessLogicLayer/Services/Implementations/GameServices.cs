@@ -1,11 +1,4 @@
-﻿using BattleGame.GameService.BusinessLogicLayer.Services.Abstractions;
-using BattleGame.GameService.Common;
-using BattleGame.GameService.Common.Dtos;
-using BattleGame.GameService.DataAccessLayer.Repositories.Abstractions;
-using BattleGame.MessageBus.Abstractions;
-using BattleGame.Shared.Common;
-
-namespace BattleGame.GameService.BusinessLogicLayer.Services.Implementations
+﻿namespace BattleGame.GameService.BusinessLogicLayer.Services.Implementations
 {
     public class GameServices(IGameRepository repository, IMessagePublisher publisher) : IGameServices
     {

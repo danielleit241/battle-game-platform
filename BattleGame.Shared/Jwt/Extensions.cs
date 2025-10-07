@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-namespace BattleGame.Shared.Jwt
+﻿namespace BattleGame.Shared.Jwt
 {
     public static class Extensions
     {
-        public static IServiceCollection AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static IHostApplicationBuilder AddJwtConfiguration(this IHostApplicationBuilder builder, IConfiguration configuration)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     var secretKey = configuration["Authentication:Jwt:Key"] ?? throw new InvalidOperationException("JWT SecretKey not configured");
@@ -41,8 +36,10 @@ namespace BattleGame.Shared.Jwt
                         }
                     };
                 });
-            services.AddAuthorization();
-            return services;
+            builder.Services.AddAuthorization();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<GetClaims>();
+            return builder;
         }
     }
 }

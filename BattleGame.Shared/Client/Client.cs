@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Net.Http.Headers;
-
-namespace BattleGame.Shared.Client
+﻿namespace BattleGame.Shared.Client
 {
     public class Client : IClient
     {

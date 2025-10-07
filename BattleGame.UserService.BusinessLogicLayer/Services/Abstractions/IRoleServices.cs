@@ -1,6 +1,4 @@
-﻿using BattleGame.Shared.Common;
-
-namespace BattleGame.UserService.BusinessLogicLayer.Services.Abstractions
+﻿namespace BattleGame.UserService.BusinessLogicLayer.Services.Abstractions
 {
     public interface IRoleServices
     {

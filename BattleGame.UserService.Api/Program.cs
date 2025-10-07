@@ -1,4 +1,3 @@
-using BattleGame.Shared.Jwt;
 using BattleGame.UserService.Api.Apis;
 using BattleGame.UserService.Api.Bootstrapping;
 using BattleGamePlatform.ServiceDefaults;
@@ -6,7 +5,6 @@ using BattleGamePlatform.ServiceDefaults;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddApplicationServices();
-builder.Services.AddJwtConfiguration(builder.Configuration);
 
 var app = builder.Build();
 

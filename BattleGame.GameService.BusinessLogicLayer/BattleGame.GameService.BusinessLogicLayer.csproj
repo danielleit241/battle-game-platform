@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BattleGame.GameService.DataAccessLayer\BattleGame.GameService.DataAccessLayer.csproj" />
-    <ProjectReference Include="..\BattleGame.Massaging\BattleGame.MessageBus.csproj" />
   </ItemGroup>
 
 </Project>

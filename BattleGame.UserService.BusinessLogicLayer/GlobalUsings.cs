@@ -1,6 +1,6 @@
 ﻿global using BattleGame.MessageBus.Abstractions;
 global using BattleGame.MessageBus.Events;
-global using BattleGame.Shared;
+global using BattleGame.Shared.Common;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 global using BattleGame.UserService.Common;
 global using BattleGame.UserService.Common.Dtos;
