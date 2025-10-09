@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BattleGame.Shared\BattleGame.Shared.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.ServiceDefaults\BattleGamePlatform.ServiceDefaults.csproj" />
   </ItemGroup>
 

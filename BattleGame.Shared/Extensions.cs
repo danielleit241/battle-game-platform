@@ -2,19 +2,17 @@
 {
     public static class Extensions
     {
-        //public static IServiceCollection AddMongoDb(this IServiceCollection services, IConfiguration Configuration)
+        //public static IHostApplicationBuilder AddMongoDb(this IHostApplicationBuilder builder, IConfiguration Configuration, string databaseName)
         //{
         //    BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-        //    BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
 
-        //    services.AddSingleton<IMongoDatabase>(sp =>
+        //    builder.AddMongoDBClient("mongodb");
+        //    builder.Services.AddSingleton<IMongoDatabase>(sp =>
         //    {
-        //        var connectionString = Configuration.GetConnectionString(Const.GameDatabase) ?? throw new InvalidOperationException("Connection string 'MongoDb' not found.");
-        //        var client = new MongoClient(connectionStrings.MongoDb);
-        //        return client.GetDatabase(mongosettings.DatabaseName);
+        //        var client = sp.GetRequiredService<IMongoClient>();
+        //        var database = client.GetDatabase(databaseName);
+        //        return database;
         //    });
-
-        //    return services;
         //}
 
         public static IHostApplicationBuilder AddNpgsqlDb<TContext>(

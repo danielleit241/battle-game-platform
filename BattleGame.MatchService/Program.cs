@@ -1,12 +1,28 @@
+using BattleGame.MatchService.Repositories;
+using BattleGame.Shared.Common;
 using BattleGamePlatform.ServiceDefaults;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Utc));
+
+builder.Services.AddSingleton<IMongoDatabase>(_ =>
+{
+    var mongoConnectionString = builder.Configuration.GetConnectionString(Const.MatchDatabase);
+    var client = new MongoClient(mongoConnectionString);
+    return client.GetDatabase(Const.MatchDatabase);
+});
+
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+
 
 var app = builder.Build();
 
@@ -27,7 +43,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

@@ -18,23 +18,6 @@
                         ValidateAudience = false,
                         ValidateIssuer = false
                     };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnAuthenticationFailed = context =>
-                        {
-                            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger>();
-                            logger.LogWarning("JWT Authentication failed: {Exception}", context.Exception?.Message);
-                            return Task.CompletedTask;
-                        },
-                        OnTokenValidated = context =>
-                        {
-                            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger>();
-                            logger.LogDebug("JWT Token validated for user: {UserId}",
-                                context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
-                            return Task.CompletedTask;
-                        }
-                    };
                 });
             builder.Services.AddAuthorization();
             builder.Services.AddHttpContextAccessor();

@@ -23,7 +23,8 @@
             group.MapDelete("/{id:guid}", DeleteGame)
                 .WithName("Delete game");
             group.MapPost("/{id:guid}/completed", CompletedGame)
-                .WithName("Completed game");
+                .WithName("Completed game")
+                .RequireAuthorization();
             return group;
         }
 
