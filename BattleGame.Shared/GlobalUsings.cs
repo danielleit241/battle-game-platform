@@ -1,14 +1,10 @@
-﻿global using BattleGame.MessageBus.Abstractions;
-global using BattleGame.MessageBus.RabbitMq;
-global using BattleGame.Shared.Common;
-global using BattleGame.Shared.Database.Abstractions;
+﻿global using BattleGame.Shared.Database.Abstractions;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
-global using Microsoft.Extensions.Logging;
 global using MongoDB.Driver;
 global using System.Linq.Expressions;
 global using System.Net.Http.Headers;

@@ -1,5 +1,6 @@
-﻿global using BattleGame.Shared;
+﻿global using BattleGame.MessageBus;
 global using BattleGame.Shared.Common;
+global using BattleGame.Shared.Database;
 global using BattleGame.Shared.Jwt;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Implementations;

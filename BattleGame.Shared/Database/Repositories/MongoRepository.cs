@@ -34,14 +34,12 @@
 
         public async Task<IReadOnlyCollection<T>> GetAllAsync(Expression<Func<T, bool>> expression)
         {
-            var filter = _filterBuilder.Where(expression);
-            return await _collection.Find(filter).ToListAsync();
+            return await _collection.Find(expression).ToListAsync();
         }
 
         public async Task<T?> GetAsync(Expression<Func<T, bool>> expression)
         {
-            var filter = _filterBuilder.Where(expression);
-            return await _collection.Find(filter).FirstOrDefaultAsync();
+            return await _collection.Find(expression).FirstOrDefaultAsync();
         }
 
         public async Task<T?> GetAsync(Guid id)

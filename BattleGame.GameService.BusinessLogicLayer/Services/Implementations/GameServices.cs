@@ -1,6 +1,6 @@
 ﻿namespace BattleGame.GameService.BusinessLogicLayer.Services.Implementations
 {
-    public class GameServices(IGameRepository repository, IMessagePublisher publisher) : IGameServices
+    public class GameServices(IGameRepository repository, IPublishEndpoint publisher) : IGameServices
     {
         public async Task<ApiResponse<GameDto>> CompleteGame(Guid gameId, Guid userId)
         {
@@ -9,7 +9,8 @@
             {
                 return ApiResponse<GameDto>.FailureResponse("Game not found");
             }
-            _ = publisher.Publish("game-completed", new { GameId = gameId, UserId = userId, CompletedAt = DateTime.UtcNow });
+
+            await publisher.Publish(new GameCompletedEvent(GameId: gameId, UserId: userId, CompletedAt: DateTime.UtcNow));
 
             var dto = game.AsDto();
             return ApiResponse<GameDto>.SuccessResponse(dto, "Game completed event published successfully");

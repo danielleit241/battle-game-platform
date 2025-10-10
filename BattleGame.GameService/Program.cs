@@ -11,11 +11,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapGameApi();
-
 await app.MigrateDbContextAsync<GameServiceDbContext>();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapGameApi();
 
 app.Run();

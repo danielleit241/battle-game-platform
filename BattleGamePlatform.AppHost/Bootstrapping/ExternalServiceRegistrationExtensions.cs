@@ -16,15 +16,18 @@
                 .WithDataVolume();
 
             var mongo = builder.AddMongoDB("mongo")
-                .WithImageTag("latest");
+                .WithImageTag("latest")
+                .WithDataVolume();
 
             var redis = builder.AddRedis("redis")
                 .WithImageTag("latest")
-                .WithHostPort(6379);
+                .WithHostPort(6379)
+                .WithDataVolume();
 
             var rabbitMq = builder.AddRabbitMQ("rabbitmq")
                 .WithImageTag("3-management")
-                .WithManagementPlugin(15672);
+                .WithManagementPlugin(15672)
+                .WithDataVolume();
 
             var userdb = postgres.AddDatabase("userservice", "userdb");
             var gamedb = postgres.AddDatabase("gameservice", "gamedb");

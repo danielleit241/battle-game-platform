@@ -4,10 +4,7 @@ using MongoDB.Driver;
 
 namespace BattleGame.MatchService.Repositories
 {
-    public class MatchRepository : MongoRepository<Match>, IMatchRepository
+    public class MatchRepository(IMongoDatabase database, string collectionName = "matches") : MongoRepository<Match>(database, collectionName), IMatchRepository
     {
-        public MatchRepository(IMongoDatabase database, string collectionName = "matches") : base(database, collectionName)
-        {
-        }
     }
 }

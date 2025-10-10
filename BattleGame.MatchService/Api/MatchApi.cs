@@ -1,5 +1,4 @@
-﻿
-using BattleGame.MatchService.Repositories;
+﻿using BattleGame.MatchService.Services;
 
 namespace BattleGame.MatchService.Api
 {
@@ -22,9 +21,14 @@ namespace BattleGame.MatchService.Api
             return group;
         }
 
-        private static async Task<IResult> GetMatchesByUserId(Guid userId, IMatchRepository repository)
+        private static async Task<IResult> GetMatchesByUserId(Guid userId, IMatchLogService service)
         {
-            return TypedResults.Ok();
+            var response = await service.GetMatchesByUserIdAsync(userId);
+            if (!response.IsSuccess)
+            {
+                return TypedResults.BadRequest(response.Message);
+            }
+            return TypedResults.Ok(response);
         }
     }
 }

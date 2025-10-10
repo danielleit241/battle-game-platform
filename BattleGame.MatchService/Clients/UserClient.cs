@@ -1,21 +1,32 @@
-﻿namespace BattleGame.MatchService.Clients
+﻿using BattleGame.MatchService.Dtos;
+using BattleGame.Shared.Client;
+using BattleGame.Shared.Common;
+using System.Text.Json;
+
+namespace BattleGame.MatchService.Clients
 {
-    public class UserClient
+    public class UserClient(HttpClient httpClient, IHttpContextAccessor httpContextAccessor) : Client(httpClient, httpContextAccessor)
     {
+        private readonly HttpClient _httpClient = httpClient;
 
-        private readonly HttpClient _httpClient;
-
-        public UserClient(HttpClient httpClient)
+        public async Task<UserDto?> GetUserByIdAsync(Guid userId)
         {
-            _httpClient = httpClient;
-        }
+            ForwardJwtBearer();
+            var response = await _httpClient.GetAsync($"api/v1/users/{userId}");
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
 
-        public async Task<string> GetUserNameAsync(Guid userId)
-        {
-            var response = await _httpClient.GetAsync($"/api/v1/users/{userId}");
-            response.EnsureSuccessStatusCode();
-            var userName = await response.Content.ReadAsStringAsync();
-            return userName;
+            var result = await response.Content.ReadFromJsonAsync<ApiResponse<UserDto>>(
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (result is null || result.Data is null)
+            {
+                return null;
+            }
+
+            return result.Data;
         }
     }
 }

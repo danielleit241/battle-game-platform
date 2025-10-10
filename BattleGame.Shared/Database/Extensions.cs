@@ -1,4 +1,4 @@
-﻿namespace BattleGame.Shared
+﻿namespace BattleGame.Shared.Database
 {
     public static class Extensions
     {
@@ -24,27 +24,6 @@
             {
                 options.UseNpgsql(builder => builder.MigrationsAssembly(typeof(TContext).Assembly.FullName));
             });
-
-            return builder;
-        }
-
-        public static IHostApplicationBuilder AddMessageBus(this IHostApplicationBuilder builder)
-        {
-            builder.Services.AddSingleton<IMessagePublisher>(sp =>
-                new RabbitMqPublisher(
-                    connectionString: builder.Configuration.GetConnectionString(Const.RabbitMq)
-                            ?? throw new InvalidOperationException("RabbitMq connection string not configured"),
-                    logger: sp.GetRequiredService<ILogger<RabbitMqPublisher>>()
-                    )
-            );
-
-            builder.Services.AddSingleton<IMessageSubscriber>(sp =>
-                new RabbitMqSubscriber(
-                        connectionString: builder.Configuration.GetConnectionString(Const.RabbitMq)
-                            ?? throw new InvalidOperationException("RabbitMq connection string not configured"),
-                        logger: sp.GetRequiredService<ILogger<RabbitMqSubscriber>>()
-                    )
-            );
 
             return builder;
         }

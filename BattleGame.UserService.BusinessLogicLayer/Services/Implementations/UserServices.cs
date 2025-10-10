@@ -4,7 +4,7 @@
         IUserRepository repository,
         IRoleRepository roleRepository,
         ITokenServices tokenService,
-        IMessagePublisher publisher) : IUserServices
+        IPublishEndpoint publish) : IUserServices
     {
         public async Task<ApiResponse<IReadOnlyCollection<UserDto>>> GetAllUsersAsync()
         {
@@ -56,7 +56,7 @@
             var user = dto.AsUser();
             await repository.AddAsync(user);
 
-            _ = publisher.Publish("user.created", new UserCreatedEvent
+            await publish.Publish(new UserCreatedEvent
             (
                 Id: user.Id,
                 Username: user.Username,

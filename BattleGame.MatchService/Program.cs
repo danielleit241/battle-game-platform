@@ -1,5 +1,11 @@
+using BattleGame.MatchService.Api;
+using BattleGame.MatchService.Clients;
+using BattleGame.MatchService.Consumers;
 using BattleGame.MatchService.Repositories;
+using BattleGame.MatchService.Services;
+using BattleGame.MessageBus;
 using BattleGame.Shared.Common;
+using BattleGame.Shared.Jwt;
 using BattleGamePlatform.ServiceDefaults;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -11,6 +17,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddOpenApi();
 
+builder.AddJwtConfiguration(builder.Configuration);
+builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
+builder.Services.AddScoped<GameCompletedConsumer>();
 BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Utc));
 
@@ -22,42 +31,30 @@ builder.Services.AddSingleton<IMongoDatabase>(_ =>
 });
 
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+builder.Services.AddScoped<IMatchLogService, MatchLogService>();
+builder.Services.AddHttpClient<UserClient>(_ =>
+{
+    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? throw new Exception("User client is empty"));
+});
 
+
+builder.Services.AddHttpClient<GameClient>(_ =>
+{
+    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? throw new Exception("Game client is empty"));
+});
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapMatchApi();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

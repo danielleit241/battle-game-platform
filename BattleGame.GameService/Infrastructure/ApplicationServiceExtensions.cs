@@ -6,8 +6,8 @@
         {
             builder.AddServiceDefaults();
             builder.AddNpgsqlDb<GameServiceDbContext>(Const.GameDatabase);
-            builder.AddMessageBus();
             builder.AddJwtConfiguration(builder.Configuration);
+            builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<IGameRepository, GameRepository>();
             builder.Services.AddScoped<IGameServices, GameServices>();

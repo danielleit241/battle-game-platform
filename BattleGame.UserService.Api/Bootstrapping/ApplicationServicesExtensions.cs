@@ -1,4 +1,7 @@
-﻿namespace BattleGame.UserService.Api.Bootstrapping
+﻿using BattleGame.MessageBus;
+using BattleGame.Shared.Database;
+
+namespace BattleGame.UserService.Api.Bootstrapping
 {
     public static class ApplicationServicesExtensions
     {
@@ -6,10 +9,9 @@
         {
             builder.AddServiceDefaults();
             builder.Services.AddOpenApi();
-
             builder.AddNpgsqlDb<UserDbContext>(Const.UserDatabase);
-            builder.AddMessageBus();
             builder.AddJwtConfiguration(builder.Configuration);
+            builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
 
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
