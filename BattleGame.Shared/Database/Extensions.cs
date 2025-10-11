@@ -1,19 +1,25 @@
-﻿namespace BattleGame.Shared.Database
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+
+namespace BattleGame.Shared.Database
 {
     public static class Extensions
     {
-        //public static IHostApplicationBuilder AddMongoDb(this IHostApplicationBuilder builder, IConfiguration Configuration, string databaseName)
-        //{
-        //    BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+        public static IHostApplicationBuilder AddMongoDb(this IHostApplicationBuilder builder, string databaseName)
+        {
+            BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+            BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Utc));
 
-        //    builder.AddMongoDBClient("mongodb");
-        //    builder.Services.AddSingleton<IMongoDatabase>(sp =>
-        //    {
-        //        var client = sp.GetRequiredService<IMongoClient>();
-        //        var database = client.GetDatabase(databaseName);
-        //        return database;
-        //    });
-        //}
+            builder.Services.AddSingleton<IMongoDatabase>(_ =>
+            {
+                var mongoConnectionString = builder.Configuration.GetConnectionString(databaseName);
+                var client = new MongoClient(mongoConnectionString);
+                return client.GetDatabase(databaseName);
+            });
+
+            return builder;
+        }
 
         public static IHostApplicationBuilder AddNpgsqlDb<TContext>(
             this IHostApplicationBuilder builder,

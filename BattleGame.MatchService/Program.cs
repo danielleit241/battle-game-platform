@@ -5,42 +5,31 @@ using BattleGame.MatchService.Repositories;
 using BattleGame.MatchService.Services;
 using BattleGame.MessageBus;
 using BattleGame.Shared.Common;
+using BattleGame.Shared.Database;
 using BattleGame.Shared.Jwt;
 using BattleGamePlatform.ServiceDefaults;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 builder.Services.AddOpenApi();
 
+builder.AddMongoDb(Const.MatchDatabase);
 builder.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
-builder.Services.AddScoped<GameCompletedConsumer>();
-BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Utc));
-
-builder.Services.AddSingleton<IMongoDatabase>(_ =>
-{
-    var mongoConnectionString = builder.Configuration.GetConnectionString(Const.MatchDatabase);
-    var client = new MongoClient(mongoConnectionString);
-    return client.GetDatabase(Const.MatchDatabase);
-});
+builder.Services.AddScoped<GameCompletedEventConsumer>();
 
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddScoped<IMatchLogService, MatchLogService>();
 builder.Services.AddHttpClient<UserClient>(_ =>
 {
-    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? throw new Exception("User client is empty"));
+    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? builder.Configuration["Clients:UserClient"] ?? throw new Exception("User client is empty"));
 });
 
 
 builder.Services.AddHttpClient<GameClient>(_ =>
 {
-    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? throw new Exception("Game client is empty"));
+    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? builder.Configuration["Clients:GameClient"] ?? throw new Exception("Game client is empty"));
 });
 
 var app = builder.Build();

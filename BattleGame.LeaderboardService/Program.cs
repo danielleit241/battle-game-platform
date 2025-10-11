@@ -1,12 +1,32 @@
+using BattleGame.LeaderboardService.Apis;
+using BattleGame.LeaderboardService.Clients;
+using BattleGame.LeaderboardService.Repositories;
+using BattleGame.LeaderboardService.Services;
+using BattleGame.MessageBus;
+using BattleGame.MessageBus.Events;
+using BattleGame.Shared.Common;
+using BattleGame.Shared.Database;
 using BattleGamePlatform.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.AddMongoDb(Const.LeaderboardDatabase);
+builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
+builder.Services.AddScoped<MatchCompletedEvent>();
+
+builder.Services.AddHttpClient<UserClient>(_ =>
+{
+    _.BaseAddress = new Uri(builder.Configuration["Clients:Gateway"] ?? builder.Configuration["Clients:UserClient"] ?? throw new Exception("User client is empty"));
+});
+
+builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
+builder.Services.AddScoped<ILeaderboardServices, LeaderboardServices>();
+
 
 var app = builder.Build();
 
@@ -18,30 +38,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapLeaderboardApi();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

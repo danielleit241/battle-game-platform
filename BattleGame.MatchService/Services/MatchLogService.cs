@@ -4,13 +4,16 @@ using BattleGame.MatchService.Entities;
 using BattleGame.MatchService.Repositories;
 using BattleGame.MessageBus.Events;
 using BattleGame.Shared.Common;
+using MassTransit;
+using MassTransit.Testing;
 
 namespace BattleGame.MatchService.Services
 {
     public class MatchLogService(
         IMatchRepository repository,
         UserClient userClient,
-        GameClient gameClient) : IMatchLogService
+        GameClient gameClient,
+        IPublishEndpoint publishEndpoint) : IMatchLogService
     {
         public async Task CreateMatch(GameCompletedEvent @event)
         {
@@ -24,6 +27,15 @@ namespace BattleGame.MatchService.Services
             };
 
             await repository.AddAsync(match);
+
+            var matchCompletedEvent = new MatchCompletedEvent(
+                match.Id,
+                match.UserId,
+                match.GameId,
+                match.Score,
+                match.CreatedAt);
+
+            await publishEndpoint.Publish(matchCompletedEvent);
         }
 
         public async Task<ApiResponse<IReadOnlyCollection<MatchDto>>> GetMatchesByUserIdAsync(Guid userId)
