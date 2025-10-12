@@ -1,5 +1,4 @@
 ﻿using BattleGame.LeaderboardService.Cache;
-using BattleGame.LeaderboardService.Clients;
 using BattleGame.LeaderboardService.Dtos;
 using BattleGame.LeaderboardService.Repositories;
 using BattleGame.MessageBus.Events;
@@ -11,13 +10,13 @@ namespace BattleGame.LeaderboardService.Services
     {
         private readonly ILeaderboardRepository _leaderboardRepository;
         private readonly IGameRepository _gameRepository;
-        private readonly UserClient _userClient;
+        private readonly IUserRepository _userRepository;
         private readonly RedisLeaderboardCache _cache;
-        public LeaderboardServices(ILeaderboardRepository leaderboardRepository, IGameRepository gameRepository, UserClient userClient, RedisLeaderboardCache cache)
+        public LeaderboardServices(ILeaderboardRepository leaderboardRepository, IGameRepository gameRepository, IUserRepository userRepository, RedisLeaderboardCache cache)
         {
             _leaderboardRepository = leaderboardRepository;
             _gameRepository = gameRepository;
-            _userClient = userClient;
+            _userRepository = userRepository;
             _cache = cache;
         }
         public async Task<ApiResponse<IReadOnlyCollection<LeaderboardWithGameDto>>> GetAllLeaderboard()
@@ -65,7 +64,7 @@ namespace BattleGame.LeaderboardService.Services
                 var topPlayers = (await Task.WhenAll(
                     cachedLeaderboards.Select(async x =>
                     {
-                        var user = await _userClient.GetUserByIdAsync(x.UserId);
+                        var user = await _userRepository.GetAsync(u => u.Id == x.UserId);
                         return new LeaderboardDto(
                             Guid.Empty,
                             x.UserId,
@@ -108,25 +107,25 @@ namespace BattleGame.LeaderboardService.Services
 
         public async Task UpSertLeaderboard(MatchCompletedEvent @event)
         {
+            var user = await _userRepository.GetAsync(user => user.Id == @event.UserId);
+            if (user is null)
+            {
+                return;
+            }
+
             var leaderboard = await _leaderboardRepository.GetAsync(leaderboard => leaderboard.GameId == @event.GameId && leaderboard.UserId == @event.UserId);
+
             if (leaderboard is not null)
             {
                 leaderboard.TotalScore += @event.Score;
                 leaderboard.UpdatedAt = DateTime.UtcNow;
+                leaderboard.Username = user.Username ?? "Unknown";
                 await _leaderboardRepository.UpdateAsync(leaderboard);
             }
             else
             {
                 var newLeaderboard = @event.AsEntity();
-                var user = await _userClient.GetUserByIdAsync(@event.UserId);
-                if (user is not null)
-                {
-                    newLeaderboard.Username = user.Username;
-                }
-                else
-                {
-                    newLeaderboard.Username = "Unknown";
-                }
+                newLeaderboard.Username = user.Username ?? "Unknown";
                 await _leaderboardRepository.AddAsync(newLeaderboard);
             }
 

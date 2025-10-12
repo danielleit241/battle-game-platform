@@ -16,10 +16,14 @@
     <Project Path="BattleGame.MatchService/BattleGame.MatchService.csproj" />
   </Folder>
   <Folder Name="/src/UserService/">
-    <Project Path="BattleGame.UserService/BattleGame.UserService.csproj" />
     <Project Path="BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" Id="5bae4b63-5967-4acd-9637-afb9a43f9544" />
     <Project Path="BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" Id="72e8501d-de34-4024-87aa-658451afe9d9" />
     <Project Path="BattleGame.UserService.DataAcessLayer/BattleGame.UserService.DataAcessLayer.csproj" Id="11f69b11-062b-4264-afc0-898d96b6ce85" />
+    <Project Path="BattleGame.UserService/BattleGame.UserService.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="BattleGame.IntergrationTests/BattleGame.IntergrationTests.csproj" Id="a63d5e2e-dc79-4a20-9304-54ce3c956694" />
+    <Project Path="BattleGamePlatform.TestHost/BattleGamePlatform.TestHost.csproj" Id="24f40fb2-e947-40bc-a22b-857bb91943b6" />
   </Folder>
   <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />
   <Project Path="BattleGamePlatform.DatabaseMigrationHelpers/BattleGamePlatform.DatabaseMigrationHelpers.csproj" />

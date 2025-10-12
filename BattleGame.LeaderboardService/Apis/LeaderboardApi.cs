@@ -16,7 +16,7 @@ namespace BattleGame.LeaderboardService.Apis
         {
             group.MapGet("", GetAllLeaderboard)
                 .WithName("Get all leaderboard");
-            group.MapGet("/{gameId:guid}", GetAllLeaderboardByGameId)
+            group.MapGet("/games/{gameId:guid}", GetAllLeaderboardByGameId)
                 .WithName("Get all leaderboard by game id");
 
             return group;

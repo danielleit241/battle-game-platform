@@ -22,6 +22,7 @@ builder.AddMongoDb(Const.LeaderboardDatabase);
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
 builder.Services.AddScoped<MatchCompletedEventConsumer>();
 builder.Services.AddScoped<GameCreatedEventConsumer>();
+builder.Services.AddScoped<UserCreatedEventConsumer>();
 
 builder.Services.AddHttpClient<UserClient>(_ =>
 {
@@ -29,7 +30,7 @@ builder.Services.AddHttpClient<UserClient>(_ =>
 });
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
-builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
 builder.Services.AddScoped<ILeaderboardServices, LeaderboardServices>();
 

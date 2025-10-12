@@ -1,4 +1,6 @@
-﻿namespace BattleGamePlatform.AppHost.Bootstrapping
+﻿using Aspire.Hosting.Yarp;
+
+namespace BattleGamePlatform.TestHost
 {
     public static class ExternalServiceRegistrationExtensions
     {
@@ -12,22 +14,18 @@
                 .WithPgWeb(pgWeb =>
                 {
                     pgWeb.WithHostPort(5050);
-                })
-                .WithDataVolume();
+                });
 
             var mongo = builder.AddMongoDB("mongo")
-                .WithImageTag("latest")
-                .WithDataVolume();
+                .WithImageTag("latest");
 
             var redis = builder.AddRedis("redis")
                 .WithImageTag("latest")
-                .WithHostPort(6379)
-                .WithDataVolume();
+                .WithHostPort(6379);
 
             var rabbitMq = builder.AddRabbitMQ("rabbitmq")
                 .WithImageTag("3-management")
-                .WithManagementPlugin(15672)
-                .WithDataVolume();
+                .WithManagementPlugin(15672);
 
             var userdb = postgres.AddDatabase("userservice", "userdb");
             var gamedb = postgres.AddDatabase("gameservice", "gamedb");
@@ -73,13 +71,6 @@
                 .WaitFor(gameservice)
                 .WaitFor(matchservice)
                 .WaitFor(leaderboardservice);
-
-            var scalar = builder.AddScalarApiReference()
-                .WithApiReference(userservice)
-                .WithApiReference(gameservice)
-                .WithApiReference(matchservice)
-                .WithApiReference(leaderboardservice)
-                .WaitFor(gateway);
 
             return builder;
         }
