@@ -26,6 +26,8 @@
             var newGame = createGameDto.AsEntity();
             await repository.AddAsync(newGame);
 
+            await publisher.Publish(new GameCreatedEvent(GameId: newGame.Id, GameName: newGame.Name, CreatedAt: newGame.CreatedAt));
+
             var gameDto = newGame.AsDto();
             return ApiResponse<GameDto>.SuccessResponse(gameDto, "Game created successfully");
         }
@@ -38,6 +40,8 @@
                 return ApiResponse<GameDto>.FailureResponse("Game not found");
             }
             await repository.DeleteAsync(game);
+
+            await publisher.Publish(new GameDeletedEvent(GameId: game.Id, DeletedAt: DateTime.UtcNow));
 
             var dto = game.AsDto();
             return ApiResponse<GameDto>.SuccessResponse(dto, "Game deleted successfully");
@@ -77,6 +81,9 @@
 
             await repository.UpdateAsync(game);
             var dto = game.AsDto();
+
+            await publisher.Publish(new GameUpdatedEvent(GameId: game.Id, GameName: game.Name, UpdatedAt: game.UpdatedAt));
+
             return ApiResponse<GameDto>.SuccessResponse(dto, "Game updated successfully");
         }
     }

@@ -1,4 +1,5 @@
-﻿using BattleGame.LeaderboardService.Clients;
+﻿using BattleGame.LeaderboardService.Cache;
+using BattleGame.LeaderboardService.Clients;
 using BattleGame.LeaderboardService.Dtos;
 using BattleGame.LeaderboardService.Repositories;
 using BattleGame.MessageBus.Events;
@@ -11,11 +12,13 @@ namespace BattleGame.LeaderboardService.Services
         private readonly ILeaderboardRepository _leaderboardRepository;
         private readonly IGameRepository _gameRepository;
         private readonly UserClient _userClient;
-        public LeaderboardServices(ILeaderboardRepository leaderboardRepository, IGameRepository gameRepository, UserClient userClient)
+        private readonly RedisLeaderboardCache _cache;
+        public LeaderboardServices(ILeaderboardRepository leaderboardRepository, IGameRepository gameRepository, UserClient userClient, RedisLeaderboardCache cache)
         {
             _leaderboardRepository = leaderboardRepository;
             _gameRepository = gameRepository;
             _userClient = userClient;
+            _cache = cache;
         }
         public async Task<ApiResponse<IReadOnlyCollection<LeaderboardWithGameDto>>> GetAllLeaderboard()
         {
@@ -55,15 +58,38 @@ namespace BattleGame.LeaderboardService.Services
             {
                 return ApiResponse<LeaderboardWithGameDto>.FailureResponse("Game not found", 404);
             }
-            var leaderboards = await _leaderboardRepository.GetAllAsync(leaderboard => leaderboard.GameId == gameId);
 
+            var cachedLeaderboards = await _cache.GetTopAsync(gameId, top);
+            if (cachedLeaderboards is not null && cachedLeaderboards.Count != 0)
+            {
+                var topPlayers = (await Task.WhenAll(
+                    cachedLeaderboards.Select(async x =>
+                    {
+                        var user = await _userClient.GetUserByIdAsync(x.UserId);
+                        return new LeaderboardDto(
+                            Guid.Empty,
+                            x.UserId,
+                            user?.Username ?? "Unknown",
+                            (int)x.Score,
+                            DateTime.MinValue,
+                            DateTime.MinValue
+                        );
+                    })
+                )).ToList();
+
+                return ApiResponse<LeaderboardWithGameDto>.SuccessResponse(
+                    new LeaderboardWithGameDto(new GameDto(game.Id, game.GameName), topPlayers)
+                );
+            }
+
+            var leaderboards = await _leaderboardRepository.GetAllAsync(leaderboard => leaderboard.GameId == gameId);
             if (leaderboards is null)
             {
                 return ApiResponse<LeaderboardWithGameDto>.FailureResponse("No leaderboards found for this game", 404);
             }
             var result = new LeaderboardWithGameDto(
                 new GameDto(game.Id, game.GameName),
-                leaderboards
+                [.. leaderboards
                     .Where(leaderboard => leaderboard.GameId == game.Id)
                     .OrderByDescending(leaderboard => leaderboard.TotalScore)
                     .Take(top)
@@ -74,7 +100,7 @@ namespace BattleGame.LeaderboardService.Services
                         leaderboard.TotalScore,
                         leaderboard.CreatedAt,
                         leaderboard.UpdatedAt
-                    )).ToList()
+                    ))]
             );
 
             return ApiResponse<LeaderboardWithGameDto>.SuccessResponse(result);
@@ -88,7 +114,7 @@ namespace BattleGame.LeaderboardService.Services
                 leaderboard.TotalScore += @event.Score;
                 leaderboard.UpdatedAt = DateTime.UtcNow;
                 var user = await _userClient.GetUserByIdAsync(@event.UserId);
-                if (user.Username != leaderboard.Username)
+                if (user!.Username != leaderboard.Username)
                 {
                     leaderboard.Username = user.Username;
                 }
@@ -108,6 +134,9 @@ namespace BattleGame.LeaderboardService.Services
                 }
                 await _leaderboardRepository.AddAsync(newLeaderboard);
             }
+
+            if (leaderboard is not null)
+                await _cache.UpdateScoreAsync(@event.GameId, @event.UserId, leaderboard.TotalScore);
         }
     }
 }

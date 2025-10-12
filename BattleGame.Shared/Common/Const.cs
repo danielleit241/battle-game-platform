@@ -7,5 +7,6 @@
         public const string MatchDatabase = "matchservice";
         public const string LeaderboardDatabase = "leaderboardservice";
         public const string RabbitMq = "rabbitmq";
+        public const string Redis = "redis";
     }
 }
