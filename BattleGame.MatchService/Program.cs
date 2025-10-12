@@ -8,6 +8,7 @@ using BattleGame.Shared.Common;
 using BattleGame.Shared.Database;
 using BattleGame.Shared.Jwt;
 using BattleGamePlatform.ServiceDefaults;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,7 @@ app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseAuthentication();

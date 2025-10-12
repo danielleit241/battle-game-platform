@@ -9,6 +9,7 @@ using BattleGame.MessageBus;
 using BattleGame.Shared.Common;
 using BattleGame.Shared.Database;
 using BattleGamePlatform.ServiceDefaults;
+using Scalar.AspNetCore;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,6 +46,7 @@ app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.MapLeaderboardApi();

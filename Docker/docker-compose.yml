@@ -41,7 +41,7 @@ services:
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
     ports:
-      - "${PGWEB_PORT:-8081}:8081"
+      - "${PGWEB_PORT:-5050}:8081"
     depends_on:
       postgres:
         condition: service_healthy
@@ -232,9 +232,7 @@ services:
     ports:
       - "${GATEWAY_PORT:-8080}:80"
     volumes:
-      - ./data/gateway/templates/default.conf.template:/etc/nginx/templates/default.conf.template:rw
-      - ./data/gateway/etc/nginx/conf.d/:/etc/nginx/conf.d/:rw
-      - ./data/gateway/logs/:/var/log/nginx/
+      - ./data/gateway/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - battlegame-userservice
       - battlegame-gameservice
