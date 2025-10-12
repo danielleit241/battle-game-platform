@@ -34,7 +34,7 @@
             var matchdb = mongo.AddDatabase("matchservice", "matchdb");
             var leaderboarddb = mongo.AddDatabase("leaderboardservice", "leaderboarddb");
 
-            var userservice = builder.AddProject<Projects.BattleGame_UserService_Api>("battlegame-userservice")
+            var userservice = builder.AddProject<Projects.BattleGame_UserService>("battlegame-userservice")
                 .WithReference(userdb)
                 .WithReference(rabbitMq)
                 .WaitFor(postgres)

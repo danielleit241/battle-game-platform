@@ -1,0 +1,255 @@
+services:
+  # Aspire Dashboard
+  dashboard:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+    container_name: aspire-dashboard
+    environment:
+      - DASHBOARD__OTLP__AUTHMODE=ApiKey
+      - DASHBOARD__OTLP__PRIMARYAPIKEY=${ASPIRE_DASHBOARD_OTLP_API_KEY}
+      - ASPNETCORE_URLS=http://+:18888
+      - DASHBOARD__OTLP__ENDPOINT=http://+:18889
+      - DASHBOARD__UNSECUREDALLOWEDANONYMOUSACCESS=true
+    ports:
+      - "${ASPIRE_DASHBOARD_UI_PORT:-18888}:18888"
+      - "${ASPIRE_DASHBOARD_OTLP_PORT:-18889}:18889"
+    networks:
+      - battle-game-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-latest}
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - battle-game-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  pgweb:
+    image: sosedoff/pgweb:latest
+    container_name: pgweb
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
+    ports:
+      - "${PGWEB_PORT:-8081}:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - battle-game-network
+
+  # MongoDB
+  mongo:
+    image: mongo:${MONGO_VERSION:-latest}
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - battle-game-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:${REDIS_VERSION:-latest}
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    container_name: redis
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - battle-game-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:${RABBITMQ_VERSION:-3-management}
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - battle-game-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+
+  # User Service API
+  battlegame-userservice:
+    build:
+      context: ../
+      dockerfile: BattleGame.UserService/Dockerfile
+    container_name: battlegame-userservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__userservice=Host=postgres;Database=userdb;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - ConnectionStrings__rabbitmq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://dashboard:18889
+      - OTEL_EXPORTER_OTLP_HEADERS=x-otlp-api-key=${ASPIRE_DASHBOARD_OTLP_API_KEY}
+      - OTEL_SERVICE_NAME=battlegame-userservice
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=battlegame-userservice,service.version=${OTEL_SERVICE_VERSION:-1.0.0}
+      - Authentication__Jwt__Key=${JWT__KEY}
+      - Authentication__Jwt__ExpiresMinutes=30
+    ports:
+      - "${USERSERVICE_PORT:-5001}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      dashboard:
+        condition: service_started
+    networks:
+      - battle-game-network
+    restart: unless-stopped
+
+  # Game Service
+  battlegame-gameservice:
+    build:
+      context: ../
+      dockerfile: BattleGame.GameService/Dockerfile
+    container_name: battlegame-gameservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__gameservice=Host=postgres;Database=gamedb;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - ConnectionStrings__rabbitmq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://dashboard:18889
+      - OTEL_EXPORTER_OTLP_HEADERS=x-otlp-api-key=${ASPIRE_DASHBOARD_OTLP_API_KEY}
+      - OTEL_SERVICE_NAME=battlegame-gameservice
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=battlegame-gameservice,service.version=${OTEL_SERVICE_VERSION:-1.0.0}
+      - Authentication__Jwt__Key=${JWT__KEY}
+    ports:
+      - "${GAMESERVICE_PORT:-5002}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      dashboard:
+        condition: service_started
+    networks:
+      - battle-game-network
+    restart: unless-stopped
+
+  # Match Service
+  battlegame-matchservice:
+    build:
+      context: ../
+      dockerfile: BattleGame.MatchService/Dockerfile
+    container_name: battlegame-matchservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__matchservice=mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/matchdb?authSource=admin
+      - ConnectionStrings__rabbitmq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://dashboard:18889
+      - OTEL_EXPORTER_OTLP_HEADERS=x-otlp-api-key=${ASPIRE_DASHBOARD_OTLP_API_KEY}
+      - OTEL_SERVICE_NAME=battlegame-matchservice
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=battlegame-matchservice,service.version=${OTEL_SERVICE_VERSION:-1.0.0}
+      - Authentication__Jwt__Key=${JWT__KEY}
+    ports:
+      - "${MATCHSERVICE_PORT:-5003}:8080"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      dashboard:
+        condition: service_started
+    networks:
+      - battle-game-network
+    restart: unless-stopped
+
+  # Leaderboard Service
+  battlegame-leaderboardservice:
+    build:
+      context: ../
+      dockerfile: BattleGame.LeaderboardService/Dockerfile
+    container_name: battlegame-leaderboardservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__leaderboardservice=mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/leaderboarddb?authSource=admin
+      - ConnectionStrings__redis=redis:6379,password=${REDIS_PASSWORD}
+      - ConnectionStrings__rabbitmq=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://dashboard:18889
+      - OTEL_EXPORTER_OTLP_HEADERS=x-otlp-api-key=${ASPIRE_DASHBOARD_OTLP_API_KEY}
+      - OTEL_SERVICE_NAME=battlegame-leaderboardservice
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=battlegame-leaderboardservice,service.version=${OTEL_SERVICE_VERSION:-1.0.0}
+    ports:
+      - "${LEADERBOARDSERVICE_PORT:-5004}:8080"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      dashboard:
+        condition: service_started
+    networks:
+      - battle-game-network
+    restart: unless-stopped
+
+  # YARP Gateway
+  gateway:
+    image: nginx:alpine
+    container_name: battlegame-gateway
+    ports:
+      - "${GATEWAY_PORT:-8080}:80"
+    volumes:
+      - ./data/gateway/templates/default.conf.template:/etc/nginx/templates/default.conf.template:rw
+      - ./data/gateway/etc/nginx/conf.d/:/etc/nginx/conf.d/:rw
+      - ./data/gateway/logs/:/var/log/nginx/
+    depends_on:
+      - battlegame-userservice
+      - battlegame-gameservice
+      - battlegame-matchservice
+      - battlegame-leaderboardservice
+    networks:
+      - battle-game-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:
+  rabbitmq_data:
+
+networks:
+  battle-game-network:
+    driver: bridge

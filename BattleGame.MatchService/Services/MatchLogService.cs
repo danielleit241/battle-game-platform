@@ -65,7 +65,7 @@ namespace BattleGame.MatchService.Services
                     {
                         new
                         (
-                            game.Id,
+                            game!.Id,
                             game.Name,
                             m.Score,
                             m.Timestamp

@@ -24,7 +24,7 @@
     <ProjectReference Include="..\BattleGame.GameService\BattleGame.GameService.csproj" />
     <ProjectReference Include="..\BattleGame.LeaderboardService\BattleGame.LeaderboardService.csproj" />
     <ProjectReference Include="..\BattleGame.MatchService\BattleGame.MatchService.csproj" />
-    <ProjectReference Include="..\BattleGame.UserService.Api\BattleGame.UserService.Api.csproj" />
+    <ProjectReference Include="..\BattleGame.UserService\BattleGame.UserService.csproj" />
   </ItemGroup>
 
 </Project>
