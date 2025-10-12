@@ -113,11 +113,6 @@ namespace BattleGame.LeaderboardService.Services
             {
                 leaderboard.TotalScore += @event.Score;
                 leaderboard.UpdatedAt = DateTime.UtcNow;
-                var user = await _userClient.GetUserByIdAsync(@event.UserId);
-                if (user!.Username != leaderboard.Username)
-                {
-                    leaderboard.Username = user.Username;
-                }
                 await _leaderboardRepository.UpdateAsync(leaderboard);
             }
             else

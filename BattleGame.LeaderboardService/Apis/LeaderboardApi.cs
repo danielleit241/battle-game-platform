@@ -32,14 +32,14 @@ namespace BattleGame.LeaderboardService.Apis
             return TypedResults.Ok(response);
         }
 
-        private static async Task GetAllLeaderboard(ILeaderboardServices leaderboard)
+        private static async Task<IResult> GetAllLeaderboard(ILeaderboardServices leaderboard)
         {
             var response = await leaderboard.GetAllLeaderboard();
             if (!response.IsSuccess)
             {
                 TypedResults.BadRequest(response.Message);
             }
-            TypedResults.Ok(response);
+            return TypedResults.Ok(response);
         }
     }
 }
