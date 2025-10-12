@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="BattleGame.Massaging/BattleGame.MessageBus.csproj" Id="10af7b09-8079-4031-8394-2a29d83bf0c5" />
+    <Project Path="BattleGame.MassageBus/BattleGame.MessageBus.csproj" Id="10af7b09-8079-4031-8394-2a29d83bf0c5" />
     <Project Path="BattleGame.Shared/BattleGame.Shared.csproj" />
   </Folder>
   <Folder Name="/src/GameService/">
