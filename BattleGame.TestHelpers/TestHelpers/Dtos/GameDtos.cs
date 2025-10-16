@@ -1,4 +1,4 @@
-﻿namespace BattleGame.IntergrationTests.TestHelpers.Dtos
+﻿namespace BattleGame.TestHelpers.TestHelpers.Dtos
 {
     public record GameDto(Guid Id, string Name, string Description, int MaxPlayers);
     public record CreateGameDto(string Name, string Description, int MaxPlayers);

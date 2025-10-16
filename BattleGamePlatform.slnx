@@ -23,6 +23,8 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="BattleGame.IntergrationTests/BattleGame.IntergrationTests.csproj" Id="a63d5e2e-dc79-4a20-9304-54ce3c956694" />
+    <Project Path="BattleGame.TestHelpers/BattleGame.TestHelpers.csproj" Id="bf516e36-a653-411c-924b-a2e8eb876967" />
+    <Project Path="BattleGame.UnitTests/BattleGame.UnitTests.csproj" Id="a42a78f5-2739-4e34-b4db-f18b8aa95f2c" />
     <Project Path="BattleGamePlatform.TestHost/BattleGamePlatform.TestHost.csproj" Id="24f40fb2-e947-40bc-a22b-857bb91943b6" />
   </Folder>
   <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />

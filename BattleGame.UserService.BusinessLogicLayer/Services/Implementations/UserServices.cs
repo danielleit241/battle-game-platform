@@ -54,6 +54,7 @@
                 return ApiResponse<UserDto>.FailureResponse("Username already exists");
 
             var user = dto.AsUser();
+            user.Role = role;
             await repository.AddAsync(user);
 
             await publish.Publish(new UserCreatedEvent

@@ -1,4 +1,4 @@
-﻿namespace BattleGame.IntergrationTests.TestHelpers.Dtos
+﻿namespace BattleGame.TestHelpers.TestHelpers.Dtos
 {
     public record LoginDto(string Username, string Password);
     public record TokenDto(string Token);

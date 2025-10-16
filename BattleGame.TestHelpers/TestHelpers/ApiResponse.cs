@@ -1,4 +1,4 @@
-﻿namespace BattleGame.IntergrationTests.TestHelpers
+﻿namespace BattleGame.TestHelpers.TestHelpers
 {
     public class ApiResponse<T> where T : class
     {

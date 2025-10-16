@@ -1,4 +1,4 @@
-﻿namespace BattleGame.IntergrationTests.TestHelpers.Dtos
+﻿namespace BattleGame.TestHelpers.TestHelpers.Dtos
 {
     public record MatchDto(Guid Id, Guid UserId, string Username, IReadOnlyCollection<MatchGameDto> MatchGameDtos);
 

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BattleGame.Massaging\BattleGame.MessageBus.csproj" />
+    <ProjectReference Include="..\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />
     <ProjectReference Include="..\BattleGame.Shared\BattleGame.Shared.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.ServiceDefaults\BattleGamePlatform.ServiceDefaults.csproj" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace BattleGame.IntergrationTests.TestHelpers.Dtos
+﻿namespace BattleGame.TestHelpers.TestHelpers.Dtos
 {
     public record LeaderboardWithGameDto(
          LeaderboardGameDto Game,

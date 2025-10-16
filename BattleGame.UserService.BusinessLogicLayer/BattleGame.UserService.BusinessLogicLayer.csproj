@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BattleGame.Massaging\BattleGame.MessageBus.csproj" />
+    <ProjectReference Include="..\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />
     <ProjectReference Include="..\BattleGame.UserService.DataAcessLayer\BattleGame.UserService.DataAcessLayer.csproj" />
   </ItemGroup>
 

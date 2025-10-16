@@ -1,6 +1,6 @@
 ﻿using Aspire.Hosting;
-using BattleGame.IntergrationTests.TestHelpers;
-using BattleGame.IntergrationTests.TestHelpers.Dtos;
+using BattleGame.TestHelpers.TestHelpers;
+using BattleGame.TestHelpers.TestHelpers.Dtos;
 using Projects;
 using System.Net.Http.Json;
 
