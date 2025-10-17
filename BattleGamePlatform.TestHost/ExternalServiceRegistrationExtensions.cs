@@ -10,11 +10,7 @@ namespace BattleGamePlatform.TestHost
         {
             var postgres = builder.AddPostgres("postgres")
                 .WithImageTag("latest")
-                .WithHostPort(5432)
-                .WithPgWeb(pgWeb =>
-                {
-                    pgWeb.WithHostPort(5050);
-                });
+                .WithHostPort(5432);
 
             var mongo = builder.AddMongoDB("mongo")
                 .WithImageTag("latest");
