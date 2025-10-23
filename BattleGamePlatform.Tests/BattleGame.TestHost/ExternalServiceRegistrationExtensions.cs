@@ -9,17 +9,21 @@ namespace BattleGamePlatform.TestHost
         public static IDistributedApplicationBuilder AddApplicationServices(this IDistributedApplicationBuilder builder)
         {
             var postgres = builder.AddPostgres("postgres")
-                .WithImageTag("latest")
+                .WithContainerName("postgres-test")
+                .WithImageTag("17")
                 .WithHostPort(5432);
 
             var mongo = builder.AddMongoDB("mongo")
+                .WithContainerName("mongo-test")
                 .WithImageTag("latest");
 
             var redis = builder.AddRedis("redis")
+                .WithContainerName("redis-test")
                 .WithImageTag("latest")
                 .WithHostPort(6379);
 
             var rabbitMq = builder.AddRabbitMQ("rabbitmq")
+                .WithContainerName("redis-dev")
                 .WithImageTag("3-management")
                 .WithManagementPlugin(15672);
 

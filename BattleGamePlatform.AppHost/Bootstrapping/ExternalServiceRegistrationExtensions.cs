@@ -7,24 +7,29 @@
         public static IDistributedApplicationBuilder AddApplicationServices(this IDistributedApplicationBuilder builder)
         {
             var postgres = builder.AddPostgres("postgres")
-                .WithImageTag("latest")
+                .WithContainerName("postgres-dev")
+                .WithImageTag("17")
                 .WithHostPort(5432)
                 .WithPgWeb(pgWeb =>
                 {
                     pgWeb.WithHostPort(5050);
+                    pgWeb.WithContainerName("pgweb-dev");
                 })
                 .WithDataVolume();
 
             var mongo = builder.AddMongoDB("mongo")
+                .WithContainerName("mongo-dev")
                 .WithImageTag("latest")
                 .WithDataVolume();
 
             var redis = builder.AddRedis("redis")
+                .WithContainerName("redis-dev")
                 .WithImageTag("latest")
                 .WithHostPort(6379)
                 .WithDataVolume();
 
             var rabbitMq = builder.AddRabbitMQ("rabbitmq")
+                .WithContainerName("rabbitmq-dev")
                 .WithImageTag("3-management")
                 .WithManagementPlugin(15672)
                 .WithDataVolume();
@@ -61,6 +66,7 @@
                 .WaitFor(rabbitMq);
 
             var gateway = builder.AddYarp("gateway")
+                .WithContainerName("gateway-dev")
                 .WithHostPort(8080)
                 .WithConfiguration(yarp =>
                 {
@@ -75,6 +81,7 @@
                 .WaitFor(leaderboardservice);
 
             var scalar = builder.AddScalarApiReference()
+                .WithContainerName("scalar-dev")
                 .WithApiReference(userservice)
                 .WithApiReference(gameservice)
                 .WithApiReference(matchservice)
