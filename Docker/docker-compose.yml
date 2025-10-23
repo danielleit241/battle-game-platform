@@ -110,7 +110,7 @@ services:
   battlegame-userservice:
     build:
       context: ../
-      dockerfile: BattleGame.UserService/Dockerfile
+      dockerfile: BattleGamePlatform.Services/User/BattleGame.UserService/Dockerfile
     container_name: battlegame-userservice
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
@@ -140,7 +140,7 @@ services:
   battlegame-gameservice:
     build:
       context: ../
-      dockerfile: BattleGame.GameService/Dockerfile
+      dockerfile: BattleGamePlatform.Services/Game/BattleGame.GameService/Dockerfile
     container_name: battlegame-gameservice
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
@@ -169,7 +169,7 @@ services:
   battlegame-matchservice:
     build:
       context: ../
-      dockerfile: BattleGame.MatchService/Dockerfile
+      dockerfile: BattleGamePlatform.Services/Match/BattleGame.MatchService/Dockerfile
     container_name: battlegame-matchservice
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
@@ -198,7 +198,7 @@ services:
   battlegame-leaderboardservice:
     build:
       context: ../
-      dockerfile: BattleGame.LeaderboardService/Dockerfile
+      dockerfile: BattleGamePlatform.Services/Leaderboard/BattleGame.LeaderboardService/Dockerfile
     container_name: battlegame-leaderboardservice
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
