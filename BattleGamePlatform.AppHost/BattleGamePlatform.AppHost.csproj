@@ -21,10 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BattleGame.GameService\BattleGame.GameService.csproj" />
-    <ProjectReference Include="..\BattleGame.LeaderboardService\BattleGame.LeaderboardService.csproj" />
-    <ProjectReference Include="..\BattleGame.MatchService\BattleGame.MatchService.csproj" />
-    <ProjectReference Include="..\BattleGame.UserService\BattleGame.UserService.csproj" />
+    <ProjectReference Include="..\BattleGamePlatform.Services\Game\BattleGame.GameService\BattleGame.GameService.csproj" />
+    <ProjectReference Include="..\BattleGamePlatform.Services\Leaderboard\BattleGame.LeaderboardService\BattleGame.LeaderboardService.csproj" />
+    <ProjectReference Include="..\BattleGamePlatform.Services\Match\BattleGame.MatchService\BattleGame.MatchService.csproj" />
+    <ProjectReference Include="..\BattleGamePlatform.Services\User\BattleGame.UserService\BattleGame.UserService.csproj" />
   </ItemGroup>
 
 </Project>
