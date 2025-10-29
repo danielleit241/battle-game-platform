@@ -1,10 +1,12 @@
-﻿namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
+﻿using System.Text.Json;
+
+namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
 {
     public class UserServices(
         IUserRepository repository,
         IRoleRepository roleRepository,
         ITokenServices tokenService,
-        IPublishEndpoint publish) : IUserServices
+        ITransactionOutboxRepository transactionOutbox) : IUserServices
     {
         public async Task<ApiResponse<IReadOnlyCollection<UserDto>>> GetAllUsersAsync()
         {
@@ -57,17 +59,18 @@
             user.Role = role;
             await repository.AddAsync(user);
 
-            await publish.Publish(new UserCreatedEvent
-            (
-                Id: user.Id,
-                Username: user.Username,
-                Email: user.Email,
-                RoleId: user.RoleId,
-                CreatedAt: user.CreatedAt
-            ));
+            var evt = user.ToCreatedEvent();
 
-            var userDto = user.AsUserDto();
-            return ApiResponse<UserDto>.SuccessResponse(userDto, "User registered successfully");
+            await transactionOutbox.AddAsync(new OutboxEvent
+            {
+                Id = Guid.NewGuid(),
+                Type = evt.GetType().AssemblyQualifiedName! ?? throw new Exception($"Could not get name of {evt.GetType()}"),
+                Payload = JsonSerializer.Serialize(evt),
+                ProcessedAt = null,
+                ProcessedCount = 0
+            });
+
+            return ApiResponse<UserDto>.SuccessResponse(user.AsUserDto(), "User registered successfully");
         }
     }
 }

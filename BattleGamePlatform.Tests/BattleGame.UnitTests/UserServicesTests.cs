@@ -1,11 +1,9 @@
-﻿using BattleGame.MessageBus.Events;
-using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
+﻿using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 using BattleGame.UserService.BusinessLogicLayer.Services.Implementations;
 using BattleGame.UserService.Common.Dtos;
 using BattleGame.UserService.Common.Entities;
 using BattleGame.UserService.DataAccessLayer.Repositories.Abstractions;
 using FluentAssertions;
-using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using System.Linq.Expressions;
@@ -18,7 +16,7 @@ namespace BattleGame.UnitTests
         private readonly Mock<IUserRepository> _userRepoMock = new();
         private readonly Mock<IRoleRepository> _roleRepoMock = new();
         private readonly Mock<ITokenServices> _tokenServiceMock = new();
-        private readonly Mock<IPublishEndpoint> _publishMock = new();
+        private readonly Mock<ITransactionOutboxRepository> _transactionOutboxRepoMock = new();
 
         private readonly UserServices _service;
 
@@ -28,7 +26,7 @@ namespace BattleGame.UnitTests
                 _userRepoMock.Object,
                 _roleRepoMock.Object,
                 _tokenServiceMock.Object,
-                _publishMock.Object
+                _transactionOutboxRepoMock.Object
             );
         }
 
@@ -136,8 +134,8 @@ namespace BattleGame.UnitTests
                                    return u;
                                });
 
-            _publishMock.Setup(p => p.Publish(It.IsAny<UserCreatedEvent>(), It.IsAny<CancellationToken>()))
-                        .Returns(Task.CompletedTask);
+            _transactionOutboxRepoMock.Setup(r => r.AddAsync(It.IsAny<OutboxEvent>()))
+                                      .ReturnsAsync((OutboxEvent e) => e);
 
             var createUserDto = new CreateUserDto(
                 Username: "newuser",

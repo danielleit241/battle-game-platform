@@ -1,5 +1,4 @@
-﻿using BattleGame.MessageBus;
-using BattleGame.Shared.Database;
+﻿using BattleGame.UserService.BusinessLogicLayer.Services;
 
 namespace BattleGame.UserService.Api.Bootstrapping
 {
@@ -12,9 +11,12 @@ namespace BattleGame.UserService.Api.Bootstrapping
             builder.AddNpgsqlDb<UserDbContext>(Const.UserDatabase);
             builder.AddJwtConfiguration(builder.Configuration);
             builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
+            builder.Services.AddSingleton<TransactionOutboxRepositoryOptions>();
+            builder.Services.AddHostedService<TransactionOutboxPollingPublisherService>();
 
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ITransactionOutboxRepository, TransactionOutboxRepository>();
 
             builder.Services.AddScoped<ITokenServices, TokenServices>();
             builder.Services.AddScoped<IRoleServices, RoleServices>();

@@ -8,7 +8,8 @@ namespace BattleGame.UserService.Common.Entities
         public string Type { get; set; } = null!;
         public string Payload { get; set; } = null!;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime ProcessedAt { get; set; }
+        public DateTime? ProcessedAt { get; set; }
+        public int ProcessedCount { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
 }

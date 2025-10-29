@@ -5,9 +5,9 @@
   </Folder>
 
   <Folder Name="/src/GameService/">
+    <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.BusinessLogicLayer/BattleGame.GameService.BusinessLogicLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.Common/BattleGame.GameService.Common.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.DataAccessLayer/BattleGame.GameService.DataAccessLayer.csproj" />
-    <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.BusinessLogicLayer/BattleGame.GameService.BusinessLogicLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService/BattleGame.GameService.csproj" />
   </Folder>
 
@@ -20,19 +20,19 @@
   </Folder>
 
   <Folder Name="/src/UserService/">
-    <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" />
+    <Project Path="BattleGamePlatform.Services/User/BattleGame.TransactionOutbox.Polling.Publisher/BattleGame.TransactionOutbox.Polling.Publisher.csproj" Id="3c74ef85-d093-4562-ae9f-6f3aff86783e" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" />
+    <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.DataAccessLayer/BattleGame.UserService.DataAccessLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService/BattleGame.UserService.csproj" />
   </Folder>
 
   <Folder Name="/tests/">
-    <Project Path="BattleGamePlatform.Tests/BattleGame.TestHelpers/BattleGame.TestHelpers.csproj" />
-    <Project Path="BattleGamePlatform.Tests/BattleGame.UnitTests/BattleGame.UnitTests.csproj" />
-    <Project Path="BattleGamePlatform.Tests/BattleGame.TestHost/BattleGame.TestHost.csproj" />
     <Project Path="BattleGamePlatform.Tests/BattleGame.IntergrationTests/BattleGame.IntergrationTests.csproj" />
+    <Project Path="BattleGamePlatform.Tests/BattleGame.TestHelpers/BattleGame.TestHelpers.csproj" />
+    <Project Path="BattleGamePlatform.Tests/BattleGame.TestHost/BattleGame.TestHost.csproj" />
+    <Project Path="BattleGamePlatform.Tests/BattleGame.UnitTests/BattleGame.UnitTests.csproj" />
   </Folder>
-
   <Project Path="BattleGamePlatform.AppHost/BattleGamePlatform.AppHost.csproj" />
   <Project Path="BattleGamePlatform.DatabaseMigrationHelpers/BattleGamePlatform.DatabaseMigrationHelpers.csproj" />
   <Project Path="BattleGamePlatform.ServiceDefaults/BattleGamePlatform.ServiceDefaults.csproj" />

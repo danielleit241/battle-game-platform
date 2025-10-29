@@ -1,4 +1,6 @@
-﻿namespace BattleGame.UserService.Common
+﻿using BattleGame.MessageBus.Events;
+
+namespace BattleGame.UserService.Common
 {
     public static class MappingExtensions
     {
@@ -28,5 +30,14 @@
 
         public static UserDto AsUserDto(this User user)
             => new(user.Id, user.Username, user.Email, user.RoleId, user.Role.Name);
+
+        public static UserCreatedEvent ToCreatedEvent(this User user)
+            => new(
+                Id: user.Id,
+                Username: user.Username,
+                Email: user.Email,
+                RoleId: user.RoleId,
+                CreatedAt: user.CreatedAt
+            );
     }
 }

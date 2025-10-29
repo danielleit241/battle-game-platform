@@ -10,8 +10,8 @@
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />   
+  <ItemGroup>   
+	<ProjectReference Include="..\BattleGame.TransactionOutbox.Polling.Publisher\BattleGame.TransactionOutbox.Polling.Publisher.csproj" />   
 	<ProjectReference Include="..\BattleGame.UserService.DataAccessLayer\BattleGame.UserService.DataAccessLayer.csproj" />
   </ItemGroup>
 
