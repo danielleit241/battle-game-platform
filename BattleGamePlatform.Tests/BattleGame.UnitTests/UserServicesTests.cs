@@ -3,7 +3,7 @@ using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 using BattleGame.UserService.BusinessLogicLayer.Services.Implementations;
 using BattleGame.UserService.Common.Dtos;
 using BattleGame.UserService.Common.Entities;
-using BattleGame.UserService.DataAcessLayer.Repositories.Abstractions;
+using BattleGame.UserService.DataAccessLayer.Repositories.Abstractions;
 using FluentAssertions;
 using MassTransit;
 using Microsoft.AspNetCore.Identity;
@@ -103,7 +103,7 @@ namespace BattleGame.UnitTests
         {
             var id = Guid.NewGuid();
             _userRepoMock.Setup(r => r.GetUserIncludeRoleAsync(id))
-                .ReturnsAsync((User)null);
+                .ReturnsAsync((User)null!);
 
             var response = await _service.GetUserByIdAsync(id);
 
@@ -160,7 +160,7 @@ namespace BattleGame.UnitTests
             var roleId = Guid.NewGuid();
 
             _roleRepoMock.Setup(r => r.GetAsync(It.IsAny<Expression<Func<Role, bool>>>()))
-                         .ReturnsAsync((Role)null);
+                         .ReturnsAsync((Role)null!);
 
             var createUserDto = new CreateUserDto(
                 Username: "newuser",

@@ -1,4 +1,4 @@
-﻿namespace BattleGame.UserService.DataAcessLayer.Infrastructure.Data
+﻿namespace BattleGame.UserService.DataAccessLayer.Infrastructure.Data
 {
     public class UserDbContext : DbContext
     {
@@ -7,5 +7,6 @@
         }
         public DbSet<User> Users => Set<User>();
         public DbSet<Role> Roles => Set<Role>();
+        public DbSet<OutboxEvent> OutboxEvents => Set<OutboxEvent>();
     }
 }

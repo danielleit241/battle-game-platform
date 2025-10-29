@@ -1,6 +1,6 @@
 ﻿using BattleGame.Shared.Database.Abstractions;
 
-namespace BattleGame.UserService.DataAcessLayer.Repositories.Abstractions
+namespace BattleGame.UserService.DataAccessLayer.Repositories.Abstractions
 {
     public interface IUserRepository : IBaseRepository<User>
     {

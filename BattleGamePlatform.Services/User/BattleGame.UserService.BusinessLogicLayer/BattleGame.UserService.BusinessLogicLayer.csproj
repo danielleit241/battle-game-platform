@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />
-    <ProjectReference Include="..\BattleGame.UserService.DataAcessLayer\BattleGame.UserService.DataAcessLayer.csproj" />
+    <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />   
+	<ProjectReference Include="..\BattleGame.UserService.DataAccessLayer\BattleGame.UserService.DataAccessLayer.csproj" />
   </ItemGroup>
 
 </Project>

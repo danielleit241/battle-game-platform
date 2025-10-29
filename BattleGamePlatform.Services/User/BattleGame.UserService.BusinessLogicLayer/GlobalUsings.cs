@@ -4,11 +4,12 @@ global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 global using BattleGame.UserService.Common;
 global using BattleGame.UserService.Common.Dtos;
 global using BattleGame.UserService.Common.Entities;
-global using BattleGame.UserService.DataAcessLayer.Repositories.Abstractions;
+global using BattleGame.UserService.DataAccessLayer.Repositories.Abstractions;
 global using MassTransit;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
+
 

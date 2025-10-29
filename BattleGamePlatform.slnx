@@ -21,8 +21,8 @@
 
   <Folder Name="/src/UserService/">
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" />
-    <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.DataAcessLayer/BattleGame.UserService.DataAcessLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" />
+    <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.DataAccessLayer/BattleGame.UserService.DataAccessLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService/BattleGame.UserService.csproj" />
   </Folder>
 
