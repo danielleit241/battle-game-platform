@@ -8,5 +8,6 @@
         public const string LeaderboardDatabase = "leaderboardservice";
         public const string RabbitMq = "rabbitmq";
         public const string Redis = "redis";
+        public const string Elasticsearch = "elasticsearch";
     }
 }

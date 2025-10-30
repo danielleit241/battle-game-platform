@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.1" />
+    <PackageReference Include="Aspire.Hosting.Elasticsearch" Version="9.5.0" />
     <PackageReference Include="Aspire.Hosting.MongoDB" Version="9.5.1" />
     <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.5.1" />
     <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.5.1" />
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BattleGamePlatform.Services\Game\BattleGame.GameService.SearchService\BattleGame.GameService.SearchService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\Game\BattleGame.GameService\BattleGame.GameService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\Leaderboard\BattleGame.LeaderboardService\BattleGame.LeaderboardService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\Match\BattleGame.MatchService\BattleGame.MatchService.csproj" />

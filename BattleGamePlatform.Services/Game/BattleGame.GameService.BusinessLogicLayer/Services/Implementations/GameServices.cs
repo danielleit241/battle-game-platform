@@ -26,7 +26,7 @@
             var newGame = createGameDto.AsEntity();
             await repository.AddAsync(newGame);
 
-            await publisher.Publish(new GameCreatedEvent(GameId: newGame.Id, GameName: newGame.Name, CreatedAt: newGame.CreatedAt));
+            await publisher.Publish(new GameCreatedEvent(GameId: newGame.Id, GameName: newGame.Name, GameDes: newGame.Description, MaxPlayers: newGame.MaxPlayers, CreatedAt: newGame.CreatedAt));
 
             var gameDto = newGame.AsDto();
             return ApiResponse<GameDto>.SuccessResponse(gameDto, "Game created successfully");

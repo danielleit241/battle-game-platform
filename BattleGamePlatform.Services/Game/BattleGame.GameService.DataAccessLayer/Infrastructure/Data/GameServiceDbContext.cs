@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BattleGame.GameService.DataAccessLayer.Infrastructure.Data
+﻿namespace BattleGame.GameService.DataAccessLayer.Infrastructure.Data
 {
     public class GameServiceDbContext : DbContext
     {

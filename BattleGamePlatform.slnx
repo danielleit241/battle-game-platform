@@ -8,6 +8,8 @@
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.BusinessLogicLayer/BattleGame.GameService.BusinessLogicLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.Common/BattleGame.GameService.Common.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.DataAccessLayer/BattleGame.GameService.DataAccessLayer.csproj" />
+    <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.Search/BattleGame.GameService.Search.csproj" Id="962baf68-5f84-453e-84a4-faecbb1a3e25" />
+    <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.SearchService/BattleGame.GameService.SearchService.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService/BattleGame.GameService.csproj" />
   </Folder>
 

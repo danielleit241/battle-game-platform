@@ -34,6 +34,10 @@
                 .WithManagementPlugin(15672)
                 .WithDataVolume();
 
+            var elasticSearch = builder.AddElasticsearch("elasticsearch")
+                .WithContainerName("elasticsearch-dev")
+                .WithContainerRuntimeArgs("--memory=512m");
+
             var userdb = postgres.AddDatabase("userservice", "userdb");
             var gamedb = postgres.AddDatabase("gameservice", "gamedb");
             var matchdb = mongo.AddDatabase("matchservice", "matchdb");
@@ -50,6 +54,13 @@
                 .WithReference(rabbitMq)
                 .WaitFor(postgres)
                 .WaitFor(rabbitMq);
+
+            var gameSearchService = builder.AddProject<Projects.BattleGame_GameService_SearchService>("battlegame-gameservice-searchservice")
+                .WithReference(rabbitMq)
+                .WithReference(elasticSearch)
+                .WaitFor(rabbitMq)
+                .WaitFor(elasticSearch);
+
 
             var matchservice = builder.AddProject<Projects.BattleGame_MatchService>("battlegame-matchservice")
                 .WithReference(matchdb)
@@ -72,6 +83,7 @@
                 {
                     yarp.AddRoute("/api/v1/users/{**catch-all}", userservice);
                     yarp.AddRoute("/api/v1/games/{**catch-all}", gameservice);
+                    yarp.AddRoute("/api/v1/games/{**catch-all}", gameSearchService);
                     yarp.AddRoute("/api/v1/matches/{**catch-all}", matchservice);
                     yarp.AddRoute("/api/v1/leaderboards/{**catch-all}", leaderboardservice);
                 })
@@ -83,7 +95,7 @@
             var scalar = builder.AddScalarApiReference()
                 .WithContainerName("scalar-dev")
                 .WithApiReference(userservice)
-                .WithApiReference(gameservice)
+                .WithApiReference(gameservice).WithApiReference(gameSearchService)
                 .WithApiReference(matchservice)
                 .WithApiReference(leaderboardservice)
                 .WaitFor(gateway);

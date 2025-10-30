@@ -25,9 +25,9 @@
             group.MapPost("/{id:guid}/completed", CompletedGame)
                 .WithName("Completed game")
                 .RequireAuthorization();
+
             return group;
         }
-
         private static async Task<IResult> CompletedGame(Guid id, IGameServices services, GetClaims getClaims)
         {
             var userId = getClaims.GetUserId();

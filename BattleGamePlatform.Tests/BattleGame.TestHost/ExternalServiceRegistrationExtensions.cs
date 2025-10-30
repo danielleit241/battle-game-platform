@@ -27,6 +27,8 @@ namespace BattleGamePlatform.TestHost
                 .WithImageTag("3-management")
                 .WithManagementPlugin(15672);
 
+
+
             var userdb = postgres.AddDatabase("userservice", "userdb");
             var gamedb = postgres.AddDatabase("gameservice", "gamedb");
             var matchdb = mongo.AddDatabase("matchservice", "matchdb");
