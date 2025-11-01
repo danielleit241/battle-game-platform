@@ -82,7 +82,7 @@
             await repository.UpdateAsync(game);
             var dto = game.AsDto();
 
-            await publisher.Publish(new GameUpdatedEvent(GameId: game.Id, GameName: game.Name, UpdatedAt: game.UpdatedAt));
+            await publisher.Publish(new GameUpdatedEvent(GameId: game.Id, GameName: game.Name, GameDes: game.Description, MaxPlayers: game.MaxPlayers, UpdatedAt: game.UpdatedAt));
 
             return ApiResponse<GameDto>.SuccessResponse(dto, "Game updated successfully");
         }
