@@ -1,15 +1,3 @@
-using BattleGame.MatchService.Api;
-using BattleGame.MatchService.Clients;
-using BattleGame.MatchService.Consumers;
-using BattleGame.MatchService.Repositories;
-using BattleGame.MatchService.Services;
-using BattleGame.MessageBus;
-using BattleGame.Shared.Common;
-using BattleGame.Shared.Database;
-using BattleGame.Shared.Jwt;
-using BattleGamePlatform.ServiceDefaults;
-using Scalar.AspNetCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();

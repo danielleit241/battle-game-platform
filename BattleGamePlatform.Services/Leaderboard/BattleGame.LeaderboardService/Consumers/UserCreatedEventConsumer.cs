@@ -1,8 +1,4 @@
-﻿using BattleGame.LeaderboardService.Repositories;
-using BattleGame.MessageBus.Events;
-using MassTransit;
-
-namespace BattleGame.LeaderboardService.Consumers
+﻿namespace BattleGame.LeaderboardService.Consumers
 {
     public class UserCreatedEventConsumer : IConsumer<UserCreatedEvent>
     {

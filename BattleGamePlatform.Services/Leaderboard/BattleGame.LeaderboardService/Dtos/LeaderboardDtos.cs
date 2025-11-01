@@ -1,6 +1,6 @@
 ﻿namespace BattleGame.LeaderboardService.Dtos
 {
-    public record LeaderboardWithGameDto(
+    public record LeaderboardResponseDto(
          GameDto Game,
          ICollection<LeaderboardDto> LeaderboardDtos
     );

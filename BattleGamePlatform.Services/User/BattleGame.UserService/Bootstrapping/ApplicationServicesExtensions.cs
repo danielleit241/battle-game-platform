@@ -1,6 +1,4 @@
-﻿using BattleGame.UserService.BusinessLogicLayer.Services;
-
-namespace BattleGame.UserService.Api.Bootstrapping
+﻿namespace BattleGame.UserService.Bootstrapping
 {
     public static class ApplicationServicesExtensions
     {
@@ -24,6 +22,5 @@ namespace BattleGame.UserService.Api.Bootstrapping
 
             return builder;
         }
-
     }
 }

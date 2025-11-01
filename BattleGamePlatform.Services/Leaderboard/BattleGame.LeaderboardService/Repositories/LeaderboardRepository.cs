@@ -1,8 +1,4 @@
-﻿using BattleGame.LeaderboardService.Entities;
-using BattleGame.Shared.Database.Repositories;
-using MongoDB.Driver;
-
-namespace BattleGame.LeaderboardService.Repositories
+﻿namespace BattleGame.LeaderboardService.Repositories
 {
     public class LeaderboardRepository : MongoRepository<Leaderboard>, ILeaderboardRepository
     {

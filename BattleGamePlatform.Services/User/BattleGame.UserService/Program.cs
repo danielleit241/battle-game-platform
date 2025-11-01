@@ -1,7 +1,3 @@
-using BattleGame.UserService.Api.Apis;
-using BattleGame.UserService.Api.Bootstrapping;
-using Scalar.AspNetCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddApplicationServices();

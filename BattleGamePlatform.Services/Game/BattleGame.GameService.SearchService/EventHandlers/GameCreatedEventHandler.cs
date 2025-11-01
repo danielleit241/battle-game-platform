@@ -1,9 +1,4 @@
-﻿using BattleGame.GameService.Search;
-using BattleGame.MessageBus.Events;
-using Elastic.Clients.Elasticsearch;
-using MassTransit;
-
-public class GameCreatedConsumer : IConsumer<GameCreatedEvent>
+﻿public class GameCreatedConsumer : IConsumer<GameCreatedEvent>
 {
     private readonly ILogger<GameCreatedConsumer> _logger;
     private readonly ElasticsearchClient _elasticsearchClient;

@@ -1,6 +1,4 @@
-﻿using BattleGame.MatchService.Services;
-
-namespace BattleGame.MatchService.Api
+﻿namespace BattleGame.MatchService.Api
 {
     public static class MatchApi
     {

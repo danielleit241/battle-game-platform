@@ -2,6 +2,9 @@
 global using BattleGame.Shared.Common;
 global using BattleGame.Shared.Database;
 global using BattleGame.Shared.Jwt;
+global using BattleGame.UserService.Apis;
+global using BattleGame.UserService.Bootstrapping;
+global using BattleGame.UserService.BusinessLogicLayer.Services;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Implementations;
 global using BattleGame.UserService.Common.Dtos;
@@ -11,3 +14,4 @@ global using BattleGame.UserService.DataAccessLayer.Repositories.Implementations
 global using BattleGamePlatform.DatabaseMigrationHelpers;
 global using BattleGamePlatform.ServiceDefaults;
 global using Microsoft.AspNetCore.Mvc;
+global using Scalar.AspNetCore;

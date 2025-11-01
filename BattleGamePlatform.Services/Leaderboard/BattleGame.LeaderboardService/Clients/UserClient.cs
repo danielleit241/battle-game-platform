@@ -1,9 +1,4 @@
-﻿using BattleGame.MatchService.Dtos;
-using BattleGame.Shared.Client;
-using BattleGame.Shared.Common;
-using System.Text.Json;
-
-namespace BattleGame.LeaderboardService.Clients
+﻿namespace BattleGame.LeaderboardService.Clients
 {
     public class UserClient(HttpClient httpClient, IHttpContextAccessor httpContextAccessor) : Client(httpClient, httpContextAccessor)
     {

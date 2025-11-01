@@ -1,7 +1,4 @@
-﻿using BattleGame.MatchService.Dtos;
-using BattleGame.Shared.Client;
-using BattleGame.Shared.Common;
-using System.Text.Json;
+﻿using BattleGame.Shared.Client;
 
 namespace BattleGame.MatchService.Clients
 {

@@ -1,6 +1,4 @@
-﻿using BattleGame.Shared.Database.Abstractions;
-
-namespace BattleGame.LeaderboardService.Entities
+﻿namespace BattleGame.LeaderboardService.Entities
 {
     public class Leaderboard : IEntity
     {

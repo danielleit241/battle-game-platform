@@ -1,13 +1,4 @@
-﻿using BattleGame.MatchService.Clients;
-using BattleGame.MatchService.Dtos;
-using BattleGame.MatchService.Entities;
-using BattleGame.MatchService.Repositories;
-using BattleGame.MessageBus.Events;
-using BattleGame.Shared.Common;
-using MassTransit;
-using MassTransit.Testing;
-
-namespace BattleGame.MatchService.Services
+﻿namespace BattleGame.MatchService.Services
 {
     public class MatchLogService(
         IMatchRepository repository,

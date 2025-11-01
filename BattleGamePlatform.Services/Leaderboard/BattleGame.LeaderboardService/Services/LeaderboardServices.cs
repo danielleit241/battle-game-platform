@@ -1,10 +1,4 @@
-﻿using BattleGame.LeaderboardService.Cache;
-using BattleGame.LeaderboardService.Dtos;
-using BattleGame.LeaderboardService.Repositories;
-using BattleGame.MessageBus.Events;
-using BattleGame.Shared.Common;
-
-namespace BattleGame.LeaderboardService.Services
+﻿namespace BattleGame.LeaderboardService.Services
 {
     public class LeaderboardServices : ILeaderboardServices
     {
@@ -19,19 +13,19 @@ namespace BattleGame.LeaderboardService.Services
             _userRepository = userRepository;
             _cache = cache;
         }
-        public async Task<ApiResponse<IReadOnlyCollection<LeaderboardWithGameDto>>> GetAllLeaderboard()
+        public async Task<ApiResponse<IReadOnlyCollection<LeaderboardResponseDto>>> GetAllLeaderboard()
         {
             var games = await _gameRepository.GetAllAsync();
             if (games is null || !games.Any())
             {
-                return ApiResponse<IReadOnlyCollection<LeaderboardWithGameDto>>.FailureResponse("No games found", 404);
+                return ApiResponse<IReadOnlyCollection<LeaderboardResponseDto>>.FailureResponse("No games found", 404);
             }
             var leaderboards = await _leaderboardRepository.GetAllAsync();
             if (leaderboards is null || !leaderboards.Any())
             {
-                return ApiResponse<IReadOnlyCollection<LeaderboardWithGameDto>>.FailureResponse("No leaderboards found", 404);
+                return ApiResponse<IReadOnlyCollection<LeaderboardResponseDto>>.FailureResponse("No leaderboards found", 404);
             }
-            var result = games.Select(game => new LeaderboardWithGameDto(
+            var result = games.Select(game => new LeaderboardResponseDto(
                 new GameDto(game.Id, game.GameName),
                 leaderboards
                     .Where(leaderboard => leaderboard.GameId == game.Id)
@@ -47,15 +41,15 @@ namespace BattleGame.LeaderboardService.Services
                     )).ToList()
             )).ToList();
 
-            return ApiResponse<IReadOnlyCollection<LeaderboardWithGameDto>>.SuccessResponse(result);
+            return ApiResponse<IReadOnlyCollection<LeaderboardResponseDto>>.SuccessResponse(result);
         }
 
-        public async Task<ApiResponse<LeaderboardWithGameDto>> GetTopXLeaderboardByGameId(Guid gameId, int top)
+        public async Task<ApiResponse<LeaderboardResponseDto>> GetTopXLeaderboardByGameId(Guid gameId, int top)
         {
             var game = await _gameRepository.GetAsync(game => game.Id == gameId);
             if (game is null)
             {
-                return ApiResponse<LeaderboardWithGameDto>.FailureResponse("Game not found", 404);
+                return ApiResponse<LeaderboardResponseDto>.FailureResponse("Game not found", 404);
             }
 
             var cachedLeaderboards = await _cache.GetTopAsync(gameId, top);
@@ -76,17 +70,17 @@ namespace BattleGame.LeaderboardService.Services
                     })
                 )).ToList();
 
-                return ApiResponse<LeaderboardWithGameDto>.SuccessResponse(
-                    new LeaderboardWithGameDto(new GameDto(game.Id, game.GameName), topPlayers)
+                return ApiResponse<LeaderboardResponseDto>.SuccessResponse(
+                    new LeaderboardResponseDto(new GameDto(game.Id, game.GameName), topPlayers)
                 );
             }
 
             var leaderboards = await _leaderboardRepository.GetAllAsync(leaderboard => leaderboard.GameId == gameId);
             if (leaderboards is null)
             {
-                return ApiResponse<LeaderboardWithGameDto>.FailureResponse("No leaderboards found for this game", 404);
+                return ApiResponse<LeaderboardResponseDto>.FailureResponse("No leaderboards found for this game", 404);
             }
-            var result = new LeaderboardWithGameDto(
+            var result = new LeaderboardResponseDto(
                 new GameDto(game.Id, game.GameName),
                 [.. leaderboards
                     .Where(leaderboard => leaderboard.GameId == game.Id)
@@ -102,7 +96,7 @@ namespace BattleGame.LeaderboardService.Services
                     ))]
             );
 
-            return ApiResponse<LeaderboardWithGameDto>.SuccessResponse(result);
+            return ApiResponse<LeaderboardResponseDto>.SuccessResponse(result);
         }
 
         public async Task UpSertLeaderboard(MatchCompletedEvent @event)

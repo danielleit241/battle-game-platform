@@ -1,15 +1,18 @@
-﻿global using BattleGame.MessageBus.Events;
-global using BattleGame.Shared.Common;
+﻿global using BattleGame.Shared.Common;
+global using BattleGame.TransactionOutbox.Polling.Publisher;
 global using BattleGame.UserService.BusinessLogicLayer.Services.Abstractions;
 global using BattleGame.UserService.Common;
 global using BattleGame.UserService.Common.Dtos;
 global using BattleGame.UserService.Common.Entities;
 global using BattleGame.UserService.DataAccessLayer.Repositories.Abstractions;
+global using DnsClient.Internal;
 global using MassTransit;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
-
-
+global using System.Text.Json;

@@ -1,8 +1,4 @@
-﻿using BattleGame.LeaderboardService.Dtos;
-using BattleGame.LeaderboardService.Entities;
-using BattleGame.MessageBus.Events;
-
-namespace BattleGame.LeaderboardService
+﻿namespace BattleGame.LeaderboardService
 {
     public static class MappingExtensions
     {

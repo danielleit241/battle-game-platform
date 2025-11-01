@@ -1,6 +1,4 @@
-﻿using BattleGame.LeaderboardService.Services;
-
-namespace BattleGame.LeaderboardService.Apis
+﻿namespace BattleGame.LeaderboardService.Apis
 {
     public static class LeaderboardApi
     {

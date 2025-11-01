@@ -1,10 +1,8 @@
-﻿using StackExchange.Redis;
-
-namespace BattleGame.LeaderboardService.Cache
+﻿namespace BattleGame.LeaderboardService.Cache
 {
     public class RedisLeaderboardCache
     {
-        private readonly StackExchange.Redis.IDatabase _database;
+        private readonly IDatabase _database;
         private const string LeaderboardKey = "leaderboard";
 
         public RedisLeaderboardCache(IConnectionMultiplexer redis)

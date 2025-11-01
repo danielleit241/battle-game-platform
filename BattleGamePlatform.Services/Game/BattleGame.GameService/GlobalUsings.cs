@@ -12,3 +12,4 @@ global using BattleGame.Shared.Database;
 global using BattleGame.Shared.Jwt;
 global using BattleGamePlatform.DatabaseMigrationHelpers;
 global using BattleGamePlatform.ServiceDefaults;
+global using Scalar.AspNetCore;

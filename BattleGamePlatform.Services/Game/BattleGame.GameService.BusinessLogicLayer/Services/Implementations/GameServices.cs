@@ -41,7 +41,7 @@
             }
             await repository.DeleteAsync(game);
 
-            await publisher.Publish(new GameDeletedEvent(GameId: game.Id, DeletedAt: DateTime.UtcNow));
+            await publisher.Publish(new GameDeletedEvent(GameId: game.Id));
 
             var dto = game.AsDto();
             return ApiResponse<GameDto>.SuccessResponse(dto, "Game deleted successfully");

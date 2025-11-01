@@ -1,17 +1,3 @@
-using BattleGame.LeaderboardService.Apis;
-using BattleGame.LeaderboardService.Cache;
-using BattleGame.LeaderboardService.Clients;
-using BattleGame.LeaderboardService.Consumers;
-using BattleGame.LeaderboardService.Repositories;
-using BattleGame.LeaderboardService.Services;
-using BattleGame.MatchService.Consumers;
-using BattleGame.MessageBus;
-using BattleGame.Shared.Common;
-using BattleGame.Shared.Database;
-using BattleGamePlatform.ServiceDefaults;
-using Scalar.AspNetCore;
-using StackExchange.Redis;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();

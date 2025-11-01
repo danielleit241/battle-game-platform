@@ -1,8 +1,4 @@
-﻿using BattleGame.GameService.Search;
-using BattleGame.Shared.Common;
-using Microsoft.AspNetCore.Mvc;
-
-namespace BattleGame.GameService.SearchService.Apis
+﻿namespace BattleGame.GameService.SearchService.Apis
 {
     public static class SearchGameApi
     {

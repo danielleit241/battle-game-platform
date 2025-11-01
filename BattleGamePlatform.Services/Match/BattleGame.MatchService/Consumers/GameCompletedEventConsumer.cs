@@ -1,8 +1,4 @@
-﻿using BattleGame.MatchService.Services;
-using BattleGame.MessageBus.Events;
-using MassTransit;
-
-namespace BattleGame.MatchService.Consumers
+﻿namespace BattleGame.MatchService.Consumers
 {
     public class GameCompletedEventConsumer : IConsumer<GameCompletedEvent>
     {

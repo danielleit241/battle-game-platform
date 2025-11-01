@@ -1,8 +1,4 @@
-﻿using BattleGame.MatchService.Dtos;
-using BattleGame.MessageBus.Events;
-using BattleGame.Shared.Common;
-
-namespace BattleGame.MatchService.Services
+﻿namespace BattleGame.MatchService.Services
 {
     public interface IMatchLogService
     {

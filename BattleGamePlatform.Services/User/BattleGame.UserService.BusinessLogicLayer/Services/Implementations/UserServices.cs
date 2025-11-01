@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
+﻿namespace BattleGame.UserService.BusinessLogicLayer.Services.Implementations
 {
     public class UserServices(
         IUserRepository repository,

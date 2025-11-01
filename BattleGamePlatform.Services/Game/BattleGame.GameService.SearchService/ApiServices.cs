@@ -1,6 +1,4 @@
-﻿using Elastic.Clients.Elasticsearch;
-
-namespace BattleGame.GameService.SearchService
+﻿namespace BattleGame.GameService.SearchService
 {
     public class ApiServices
     {

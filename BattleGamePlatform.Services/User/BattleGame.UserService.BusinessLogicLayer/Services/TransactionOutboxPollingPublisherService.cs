@@ -1,10 +1,4 @@
-﻿using BattleGame.TransactionOutbox.Polling.Publisher;
-using DnsClient.Internal;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-
-namespace BattleGame.UserService.BusinessLogicLayer.Services
+﻿namespace BattleGame.UserService.BusinessLogicLayer.Services
 {
     public class TransactionOutboxPollingPublisherService : BackgroundService
     {
