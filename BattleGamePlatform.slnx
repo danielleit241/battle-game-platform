@@ -3,8 +3,7 @@
     <Project Path="BattleGamePlatform.Utils/BattleGame.MassageBus/BattleGame.MessageBus.csproj" Id="10af7b09-8079-4031-8394-2a29d83bf0c5" />
     <Project Path="BattleGamePlatform.Utils/BattleGame.Shared/BattleGame.Shared.csproj" />
   </Folder>
-
-  <Folder Name="/src/GameService/">
+  <Folder Name="/src/Game/">
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.BusinessLogicLayer/BattleGame.GameService.BusinessLogicLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.Common/BattleGame.GameService.Common.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.DataAccessLayer/BattleGame.GameService.DataAccessLayer.csproj" />
@@ -12,16 +11,17 @@
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService.SearchService/BattleGame.GameService.SearchService.csproj" />
     <Project Path="BattleGamePlatform.Services/Game/BattleGame.GameService/BattleGame.GameService.csproj" />
   </Folder>
-
-  <Folder Name="/src/LeaderboardService/">
+  <Folder Name="/src/Leaderboard/">
     <Project Path="BattleGamePlatform.Services/Leaderboard/BattleGame.LeaderboardService/BattleGame.LeaderboardService.csproj" />
   </Folder>
-
-  <Folder Name="/src/MatchService/">
+  <Folder Name="/src/Match/">
     <Project Path="BattleGamePlatform.Services/Match/BattleGame.MatchService/BattleGame.MatchService.csproj" />
   </Folder>
-
-  <Folder Name="/src/UserService/">
+  <Folder Name="/src/Tournament/">
+    <Project Path="BattleGamePlatform.Services/Tournament/BattleGame.TournamentService.IntergrationEvents/BattleGame.TournamentService.IntergrationEvents.csproj" Id="40d02511-1fc0-4701-b4e8-e829aa5be2d7" />
+    <Project Path="BattleGamePlatform.Services/Tournament/BattleGame.TournamentService/BattleGame.TournamentService.csproj" />
+  </Folder>
+  <Folder Name="/src/User/">
     <Project Path="BattleGamePlatform.Services/User/BattleGame.TransactionOutbox.Polling.Publisher/BattleGame.TransactionOutbox.Polling.Publisher.csproj" Id="3c74ef85-d093-4562-ae9f-6f3aff86783e" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.BusinessLogicLayer/BattleGame.UserService.BusinessLogicLayer.csproj" />
     <Project Path="BattleGamePlatform.Services/User/BattleGame.UserService.Common/BattleGame.UserService.Common.csproj" />

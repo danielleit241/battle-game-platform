@@ -76,6 +76,15 @@
                 .WaitFor(redis)
                 .WaitFor(rabbitMq);
 
+            var tournamentService = builder.AddProject<Projects.BattleGame_TournamentService>("battlegame-tournamentservice")
+                .WithReference(postgres)
+                .WithReference(mongo)
+                .WithReference(rabbitMq)
+                .WaitFor(postgres)
+                .WaitFor(mongo)
+                .WaitFor(rabbitMq);
+
+
             var gateway = builder.AddYarp("gateway")
                 .WithContainerName("gateway-dev")
                 .WithHostPort(8080)
