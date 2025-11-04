@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 builder.AddServiceDefaults();
+builder.AddRateLimit();
 builder.Services.AddOpenApi();
 
 builder.AddMongoDb(Const.LeaderboardDatabase);
@@ -35,7 +36,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
-
+app.UseRateLimiter();
+app.UseMiddleware<GlobalExceptionsMiddleware>();
 app.MapLeaderboardApi();
 
 app.Run();

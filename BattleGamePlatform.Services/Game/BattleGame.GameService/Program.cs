@@ -13,10 +13,10 @@ if (app.Environment.IsDevelopment())
 }
 
 await app.MigrateDbContextAsync<GameServiceDbContext>();
-
+app.UseRateLimiter();
+app.UseMiddleware<GlobalExceptionsMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapGameApi();
 
 app.Run();

@@ -5,6 +5,7 @@
         public static IHostApplicationBuilder AddApplicationServices(this IHostApplicationBuilder builder)
         {
             builder.AddServiceDefaults();
+            builder.AddRateLimit();
             builder.Services.AddOpenApi();
             builder.AddNpgsqlDb<UserDbContext>(Const.UserDatabase);
             builder.AddJwtConfiguration(builder.Configuration);

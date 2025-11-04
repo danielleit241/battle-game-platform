@@ -1,6 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+builder.AddRateLimit();
 builder.Services.AddOpenApi();
 
 builder.AddMongoDb(Const.MatchDatabase);
@@ -30,10 +31,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
-
+app.UseMiddleware<GlobalExceptionsMiddleware>();
+app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapMatchApi();
 
 app.Run();

@@ -4,7 +4,7 @@ using BattleGame.TournamentService.IntergrationEvents;
 
 namespace BattleGame.TournamentService
 {
-    public static class MappingExtentions
+    public static class MappingExtensions
     {
         public static CreatedTournamentIntergrationEvent AsTournamentCreatedEvent(this Tournament tournament)
         {

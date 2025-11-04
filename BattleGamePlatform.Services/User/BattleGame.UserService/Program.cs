@@ -12,7 +12,8 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 await app.MigrateDbContextAsync<UserDbContext>();
-
+app.UseMiddleware<GlobalExceptionsMiddleware>();
+app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 

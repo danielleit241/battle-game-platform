@@ -61,7 +61,6 @@
                 .WaitFor(rabbitMq)
                 .WaitFor(elasticSearch);
 
-
             var matchservice = builder.AddProject<Projects.BattleGame_MatchService>("battlegame-matchservice")
                 .WithReference(matchdb)
                 .WithReference(rabbitMq)
@@ -84,7 +83,6 @@
                 .WaitFor(mongo)
                 .WaitFor(rabbitMq);
 
-
             var gateway = builder.AddYarp("gateway")
                 .WithContainerName("gateway-dev")
                 .WithHostPort(8080)
@@ -95,11 +93,13 @@
                     yarp.AddRoute("/api/v1/games/{**catch-all}", gameSearchService);
                     yarp.AddRoute("/api/v1/matches/{**catch-all}", matchservice);
                     yarp.AddRoute("/api/v1/leaderboards/{**catch-all}", leaderboardservice);
+                    yarp.AddRoute("/api/v1/tournaments/{**catch-all}", tournamentService);
                 })
                 .WaitFor(userservice)
                 .WaitFor(gameservice)
                 .WaitFor(matchservice)
-                .WaitFor(leaderboardservice);
+                .WaitFor(leaderboardservice)
+                .WaitFor(tournamentService);
 
             var scalar = builder.AddScalarApiReference()
                 .WithContainerName("scalar-dev")
@@ -107,6 +107,7 @@
                 .WithApiReference(gameservice).WithApiReference(gameSearchService)
                 .WithApiReference(matchservice)
                 .WithApiReference(leaderboardservice)
+                .WithApiReference(tournamentService)
                 .WaitFor(gateway);
 
             return builder;

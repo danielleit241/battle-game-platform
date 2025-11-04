@@ -5,6 +5,7 @@
         public static IHostApplicationBuilder AddApplicationServices(this IHostApplicationBuilder builder)
         {
             builder.AddServiceDefaults();
+            builder.AddRateLimit();
             builder.AddNpgsqlDb<GameServiceDbContext>(Const.GameDatabase);
             builder.AddJwtConfiguration(builder.Configuration);
             builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
