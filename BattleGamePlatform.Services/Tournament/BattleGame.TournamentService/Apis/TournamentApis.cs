@@ -1,4 +1,5 @@
-﻿using BattleGame.TournamentService.Dtos;
+﻿using BattleGame.TournamentService.CQRSServices.Tournament.Command;
+using BattleGame.TournamentService.Dtos;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,12 +26,16 @@ namespace BattleGame.TournamentService.Apis
         }
         private static async Task<IResult> RegisterPlayerAsync([FromBody] RegisterTournamentDto dto, IMediator mediator)
         {
-            throw new NotImplementedException();
+            var command = new RegisterTournamentCommand(dto);
+            var response = await mediator.Send(command);
+            return Results.Ok(response);
         }
 
-        private static async Task CreateTournamentAsync([FromBody] CreateTournamentDto dto, [AsParameters] ApiServices apiServices)
+        private static async Task<IResult> CreateTournamentAsync([FromBody] CreateTournamentDto dto, [AsParameters] ApiServices apiServices)
         {
-            throw new NotImplementedException();
+            var command = new CreateTournamentCommand(dto);
+            var response = await apiServices.Mediator.Send(command);
+            return Results.Ok(response);
         }
     }
 }

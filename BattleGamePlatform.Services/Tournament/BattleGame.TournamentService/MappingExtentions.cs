@@ -68,5 +68,43 @@ namespace BattleGame.TournamentService
                 tournament.UpdatedAt
             );
         }
+
+        public static TournamentParticipant AsParticipantEntity(this RegisterTournamentDto dto)
+        {
+            return new TournamentParticipant
+            {
+                Id = dto.Id,
+                ParticipantName = dto.ParticipantName,
+                TournamentId = dto.TournamentId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+        }
+
+        public static CreatedParticipantIntergrationEvent AsParticipantCreatedEvent(this TournamentParticipant participant)
+        {
+            return new CreatedParticipantIntergrationEvent
+            {
+                Id = participant.Id,
+                ParticipantName = participant.ParticipantName,
+                TournamentId = participant.TournamentId,
+                CreatedAt = participant.CreatedAt,
+                UpdatedAt = participant.UpdatedAt
+            };
+        }
+
+        public static CreatedMatchIntergrationEvent AsMatchCreatedEvent(this TournamentMatch match)
+        {
+            return new CreatedMatchIntergrationEvent
+            {
+                Id = match.Id,
+                RoundId = match.RoundId,
+                Player1Id = match.Player1Id,
+                Player2Id = match.Player2Id,
+                WinnerId = match.WinnerId,
+                CreatedAt = match.CreatedAt,
+                UpdatedAt = match.UpdatedAt
+            };
+        }
     }
 }

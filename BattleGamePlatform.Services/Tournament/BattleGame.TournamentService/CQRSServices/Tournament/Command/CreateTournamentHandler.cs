@@ -7,7 +7,6 @@ using MediatR;
 namespace BattleGame.TournamentService.CQRSServices.Tournament.Command
 {
     public record CreateTournamentCommand(CreateTournamentDto Dto) : IRequest<ApiResponse<TournamentDto>>;
-
     public class CreateTournamentHandler : IRequestHandler<CreateTournamentCommand, ApiResponse<TournamentDto>>
     {
         private readonly ILogger<CreateTournamentHandler> _logger;
@@ -33,6 +32,12 @@ namespace BattleGame.TournamentService.CQRSServices.Tournament.Command
             var tournamentEntity = request.Dto.AsTournamentEntity();
             _logger.LogInformation("Mapped CreateTournamentDto to Tournament entity");
 
+            if (!IsPowerOfTwo(tournamentEntity.MaxParticipants))
+            {
+                _logger.LogWarning("MaxParticipants {MaxParticipants} is not a power of two", tournamentEntity.MaxParticipants);
+                return ApiResponse<TournamentDto>.FailureResponse("MaxParticipants must be a power of two (e.g., 2, 4, 8, 16, 32, etc.)");
+            }
+
             await _tournamentWriteRepository.AddAsync(tournamentEntity);
             _logger.LogInformation("Tournament entity added to repository");
 
@@ -53,6 +58,11 @@ namespace BattleGame.TournamentService.CQRSServices.Tournament.Command
             _logger.LogInformation("Mapped Tournament entity to TournamentDto");
 
             return ApiResponse<TournamentDto>.SuccessResponse(tournamentDto, "Tournament created successfully");
+        }
+
+        private static bool IsPowerOfTwo(int number)
+        {
+            return (number > 0) && ((number & (number - 1)) == 0);
         }
     }
 }

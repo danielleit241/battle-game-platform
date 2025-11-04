@@ -4,10 +4,10 @@ namespace BattleGame.TournamentService
 {
     public class ApiServices
     {
-        private readonly IMediator mediator;
+        public readonly IMediator Mediator;
         public ApiServices(IMediator mediator)
         {
-            this.mediator = mediator;
+            Mediator = mediator;
         }
     }
 }

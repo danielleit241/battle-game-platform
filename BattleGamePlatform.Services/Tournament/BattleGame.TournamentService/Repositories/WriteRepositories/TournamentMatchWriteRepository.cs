@@ -10,10 +10,5 @@ namespace BattleGame.TournamentService.Repositories.WriteRepositories
         public TournamentMatchWriteRepository(TournamentWriteDbContext context) : base(context)
         {
         }
-
-        public Task AddMatchesByRoundId(Guid roundId, Guid player1, Guid player2)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
