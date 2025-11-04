@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 builder.AddNpgsqlDb<TournamentWriteDbContext>(Const.TournamentDatabase + "Write");
-builder.AddNpgsqlDb<TournamentReadDbContext>(Const.TournamentDatabase + "Read");
+builder.AddMongoDb(Const.TournamentDatabase + "Read");
 
 builder.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);

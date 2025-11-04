@@ -8,7 +8,7 @@ namespace BattleGame.TournamentService.Entities
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int MaxParticipants { get; set; }
-        public string GameId { get; set; } = null!;
+        public Guid GameId { get; set; }
         public TournamentStatus Status { get; set; }
         public TournamentFormat Format { get; set; }
         public DateTime StartDate { get; set; }

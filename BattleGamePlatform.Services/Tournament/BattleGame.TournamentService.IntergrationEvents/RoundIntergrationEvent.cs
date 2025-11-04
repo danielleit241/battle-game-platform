@@ -1,0 +1,12 @@
+﻿namespace BattleGame.TournamentService.IntergrationEvents
+{
+    public class CreatedRoundIntergrationEvent
+    {
+        public Guid Id { get; set; }
+        public Guid TournamentId { get; set; }
+        public int RoundNumber { get; set; }
+        public int Status { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
+}

@@ -8,6 +8,7 @@ namespace BattleGame.TournamentService.Dtos
             string Description,
             int MaxParticipants,
             Guid GameId,
+            TournamentStatus Status,
             TournamentFormat Format,
             DateTime StartDate,
             DateTime EndDate,

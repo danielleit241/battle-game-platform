@@ -1,13 +1,13 @@
 ﻿using BattleGame.Shared.Database.Repositories;
 using BattleGame.TournamentService.Entities;
-using BattleGame.TournamentService.Infrastructure.Data;
 using BattleGame.TournamentService.Repositories.ReadRepositories.Interfaces;
+using MongoDB.Driver;
 
 namespace BattleGame.TournamentService.Repositories.ReadRepositories
 {
-    public class TournamentMatchReadRepository : PostgresRepository<TournamentMatch>, ITournamentMatchReadRepository
+    public class TournamentMatchReadRepository : MongoRepository<TournamentMatch>, ITournamentMatchReadRepository
     {
-        public TournamentMatchReadRepository(TournamentReadDbContext context) : base(context)
+        public TournamentMatchReadRepository(IMongoDatabase database, string collectionName = "Matches") : base(database, collectionName)
         {
         }
     }

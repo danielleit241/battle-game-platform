@@ -10,6 +10,5 @@ namespace BattleGame.TournamentService.CQRSServices.Match.Command
         {
             throw new NotImplementedException();
         }
-    {
     }
 }

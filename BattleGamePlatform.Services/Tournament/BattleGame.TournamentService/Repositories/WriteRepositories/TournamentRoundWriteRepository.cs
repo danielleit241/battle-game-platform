@@ -11,7 +11,7 @@ namespace BattleGame.TournamentService.Repositories.WriteRepositories
         {
         }
 
-        public Task CreateRoundByNumberOfParticipants(Guid tournamentId, int maxParticipants)
+        public Task<IEnumerable<TournamentRound>> GenerateRoundsForTournamentAsync(Guid tournamentId, int maxParticipants)
         {
             throw new NotImplementedException();
         }

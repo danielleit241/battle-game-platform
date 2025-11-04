@@ -25,6 +25,7 @@
     <ProjectReference Include="..\..\..\BattleGamePlatform.ServiceDefaults\BattleGamePlatform.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />
     <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.Shared\BattleGame.Shared.csproj" />
+    <ProjectReference Include="..\BattleGame.TournamentService.IntergrationEvents\BattleGame.TournamentService.IntergrationEvents.csproj" />
   </ItemGroup>
 
   <ItemGroup>

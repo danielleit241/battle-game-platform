@@ -4,10 +4,10 @@ using MediatR;
 
 namespace BattleGame.TournamentService.CQRSServices.Tournament.Command
 {
-    public record RegisterTournamentCommand(RegisterTournamentDto Dto) : IRequest<bool>
-    public class RegisterTournamentHandler : IRequestHandler<RegisterTournamentCommand, bool>
+    public record RegisterTournamentCommand(RegisterTournamentDto Dto) : IRequest<ApiResponse<TournamentDto>>;
+    public class RegisterTournamentHandler : IRequestHandler<RegisterTournamentCommand, ApiResponse<TournamentDto>>
     {
-        public Task<bool> Handle(RegisterTournamentCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<TournamentDto>> Handle(RegisterTournamentCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
