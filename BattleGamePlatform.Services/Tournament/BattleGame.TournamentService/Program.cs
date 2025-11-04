@@ -32,7 +32,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 await app.MigrateDbContextAsync<TournamentWriteDbContext>();
-await app.MigrateDbContextAsync<TournamentReadDbContext>();
 
 app.UseHttpsRedirection();
 
