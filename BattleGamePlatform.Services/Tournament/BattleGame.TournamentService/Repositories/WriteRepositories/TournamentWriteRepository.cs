@@ -1,13 +1,13 @@
 ﻿using BattleGame.Shared.Database.Repositories;
-using BattleGame.TournamentService.Entities.WriteEntities;
+using BattleGame.TournamentService.Entities;
 using BattleGame.TournamentService.Infrastructure.Data;
 using BattleGame.TournamentService.Repositories.WriteRepositories.Interfaces;
 
 namespace BattleGame.TournamentService.Repositories.WriteRepositories
 {
-    public class TournamentRepository : PostgresRepository<Tournament>, ITournamentRepository
+    public class TournamentWriteRepository : PostgresRepository<Tournament>, ITournamentWriteRepository
     {
-        public TournamentRepository(TournamentWriteDbContext context) : base(context)
+        public TournamentWriteRepository(TournamentWriteDbContext context) : base(context)
         {
         }
     }

@@ -2,6 +2,7 @@ using BattleGame.MessageBus;
 using BattleGame.Shared.Common;
 using BattleGame.Shared.Database;
 using BattleGame.Shared.Jwt;
+using BattleGame.TournamentService.CQRSServices.Tournament.Command;
 using BattleGame.TournamentService.Infrastructure.Data;
 using BattleGamePlatform.DatabaseMigrationHelpers;
 using BattleGamePlatform.ServiceDefaults;
@@ -10,10 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddNpgsqlDb<TournamentWriteDbContext>(Const.TournamentDatabase);
-builder.AddMongoDb(Const.TournamentDatabase);
+builder.AddNpgsqlDb<TournamentWriteDbContext>(Const.TournamentDatabase + "Write");
+builder.AddNpgsqlDb<TournamentReadDbContext>(Const.TournamentDatabase + "Read");
+
 builder.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(CreateTournamentHandler).Assembly);
+});
 
 builder.Services.AddOpenApi();
 
@@ -26,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 await app.MigrateDbContextAsync<TournamentWriteDbContext>();
+await app.MigrateDbContextAsync<TournamentReadDbContext>();
 
 app.UseHttpsRedirection();
 

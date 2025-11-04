@@ -1,6 +1,6 @@
 ﻿using BattleGame.Shared.Database.Abstractions;
 
-namespace BattleGame.TournamentService.Entities.WriteEntities
+namespace BattleGame.TournamentService.Entities
 {
     public class TournamentMatch : IEntity
     {

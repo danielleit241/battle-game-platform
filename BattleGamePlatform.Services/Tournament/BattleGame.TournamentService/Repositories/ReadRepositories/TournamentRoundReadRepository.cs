@@ -5,9 +5,9 @@ using BattleGame.TournamentService.Repositories.ReadRepositories.Interfaces;
 
 namespace BattleGame.TournamentService.Repositories.ReadRepositories
 {
-    public class TournamentReadRepository : PostgresRepository<Tournament>, ITournamentReadRepository
+    public class TournamentRoundReadRepository : PostgresRepository<TournamentRound>, ITournamentRoundReadRepository
     {
-        public TournamentReadRepository(TournamentReadDbContext context) : base(context)
+        public TournamentRoundReadRepository(TournamentReadDbContext context) : base(context)
         {
         }
     }

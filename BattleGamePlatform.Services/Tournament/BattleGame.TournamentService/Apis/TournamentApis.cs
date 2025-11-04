@@ -18,27 +18,9 @@ namespace BattleGame.TournamentService.Apis
 
             group.MapPost("/{tournamentId:guid}/register", RegisterPlayerAsync)
                 .WithName("Register player to tournament");
-
-            group.MapPost("/{tournamentId:guid}/start", StartTournamentAsync)
-                .WithName("Start tournament");
-
-            group.MapPut("/{tournamentId:guid}/change-state", UpdateStatusAsync)
-                .WithName("Update tournament status");
-
             return group;
         }
-
-        private static async Task StartTournamentAsync(HttpContext context)
-        {
-            throw new NotImplementedException();
-        }
-
         private static async Task RegisterPlayerAsync(HttpContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static async Task UpdateStatusAsync(HttpContext context)
         {
             throw new NotImplementedException();
         }

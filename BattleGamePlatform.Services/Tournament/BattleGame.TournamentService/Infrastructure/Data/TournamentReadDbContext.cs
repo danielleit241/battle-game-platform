@@ -3,10 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BattleGame.TournamentService.Infrastructure.Data
 {
-    public class TournamentWriteDbContext : DbContext
+    public class TournamentReadDbContext : DbContext
     {
-        public TournamentWriteDbContext(DbContextOptions<TournamentWriteDbContext> options)
-            : base(options)
+        public TournamentReadDbContext(DbContextOptions<TournamentReadDbContext> options) : base(options)
         {
         }
 
