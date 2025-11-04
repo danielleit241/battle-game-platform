@@ -69,13 +69,13 @@ namespace BattleGame.TournamentService
             );
         }
 
-        public static TournamentParticipant AsParticipantEntity(this RegisterTournamentDto dto)
+        public static TournamentParticipant AsParticipantEntity(this RegisterTournamentDto dto, Guid tournamentId)
         {
             return new TournamentParticipant
             {
                 Id = dto.Id,
                 ParticipantName = dto.ParticipantName,
-                TournamentId = dto.TournamentId,
+                TournamentId = tournamentId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };

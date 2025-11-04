@@ -28,7 +28,6 @@ namespace BattleGame.TournamentService.Dtos
 
     public record RegisterTournamentDto(
             Guid Id,
-            string ParticipantName,
-            Guid TournamentId
+            string ParticipantName
         );
 }

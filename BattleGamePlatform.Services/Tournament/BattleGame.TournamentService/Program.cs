@@ -6,7 +6,6 @@ using BattleGame.TournamentService.CQRSServices.Tournament.Command;
 using BattleGame.TournamentService.Infrastructure.Data;
 using BattleGamePlatform.DatabaseMigrationHelpers;
 using BattleGamePlatform.ServiceDefaults;
-using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +16,11 @@ builder.AddMongoDb(Const.TournamentDatabase + "Read");
 
 builder.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
-builder.Services.AddMediatR(typeof(CreateTournamentHandler).Assembly);
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(RegisterTournamentHandler).Assembly));
+
+
 
 builder.Services.AddOpenApi();
 

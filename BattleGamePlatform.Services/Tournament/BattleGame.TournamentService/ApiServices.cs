@@ -1,4 +1,4 @@
-﻿using MassTransit.Mediator;
+﻿using MediatR;
 
 namespace BattleGame.TournamentService
 {

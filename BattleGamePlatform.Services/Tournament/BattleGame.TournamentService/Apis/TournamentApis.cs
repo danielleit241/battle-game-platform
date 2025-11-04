@@ -1,6 +1,6 @@
 ﻿using BattleGame.TournamentService.CQRSServices.Tournament.Command;
 using BattleGame.TournamentService.Dtos;
-using MassTransit.Mediator;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BattleGame.TournamentService.Apis
@@ -24,9 +24,9 @@ namespace BattleGame.TournamentService.Apis
                 .WithName("Register player to tournament");
             return group;
         }
-        private static async Task<IResult> RegisterPlayerAsync([FromBody] RegisterTournamentDto dto, IMediator mediator)
+        private static async Task<IResult> RegisterPlayerAsync(Guid tournamentId, [FromBody] RegisterTournamentDto dto, IMediator mediator)
         {
-            var command = new RegisterTournamentCommand(dto);
+            var command = new RegisterTournamentCommand(dto, tournamentId);
             var response = await mediator.Send(command);
             return Results.Ok(response);
         }
