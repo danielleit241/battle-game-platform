@@ -6,7 +6,8 @@
         {
             builder.MapGroup("/api/v1/matches")
                 .MapMatchApi()
-                .WithTags("Matches Api");
+                .WithTags("Matches Api")
+                .RequireRateLimiting("fixed");
 
             return builder;
         }

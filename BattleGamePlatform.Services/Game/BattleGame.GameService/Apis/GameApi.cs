@@ -6,7 +6,8 @@
         {
             builder.MapGroup("/api/v1/games")
                 .MapGameApi()
-                .WithTags("Game Api");
+                .WithTags("Game Api")
+                .RequireRateLimiting("fixed");
             return builder;
         }
 

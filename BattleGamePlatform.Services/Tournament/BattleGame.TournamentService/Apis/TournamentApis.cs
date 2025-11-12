@@ -11,7 +11,9 @@ namespace BattleGame.TournamentService.Apis
         {
             builder.MapGroup("/api/v1/tournaments")
                 .MapTournamentApi()
-                .WithTags("Tournament Api");
+                .WithTags("Tournament Api")
+                .RequireRateLimiting("fixed");
+
             return builder;
         }
 

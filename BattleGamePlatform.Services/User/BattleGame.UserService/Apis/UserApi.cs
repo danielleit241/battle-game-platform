@@ -6,7 +6,8 @@
         {
             builder.MapGroup("/api/v1/users")
                 .MapUserApi()
-                .WithTags("User Api");
+                .WithTags("User Api")
+                .RequireRateLimiting("fixed");
             return builder;
         }
         public static RouteGroupBuilder MapUserApi(this RouteGroupBuilder group)

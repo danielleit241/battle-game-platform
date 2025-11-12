@@ -6,7 +6,8 @@
         {
             builder.MapGroup("/api/v1/leaderboards")
                 .MapLeaderboardApi()
-                .WithTags("Leaderboards Api");
+                .WithTags("Leaderboards Api")
+                .RequireRateLimiting("fixed");
             return builder;
         }
 
