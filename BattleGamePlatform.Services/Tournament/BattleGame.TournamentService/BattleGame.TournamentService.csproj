@@ -29,8 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQRSServices\Match\Query\" />
-    <Folder Include="CQRSServices\Tournament\Query\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

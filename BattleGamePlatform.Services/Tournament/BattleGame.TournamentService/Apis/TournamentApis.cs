@@ -24,6 +24,7 @@ namespace BattleGame.TournamentService.Apis
 
             group.MapPost("/{tournamentId:guid}/register", RegisterPlayerAsync)
                 .WithName("Register player to tournament");
+
             return group;
         }
         private static async Task<IResult> RegisterPlayerAsync(Guid tournamentId, [FromBody] RegisterTournamentDto dto, IMediator mediator)

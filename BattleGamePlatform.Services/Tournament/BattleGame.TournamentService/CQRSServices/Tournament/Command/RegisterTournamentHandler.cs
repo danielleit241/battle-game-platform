@@ -1,7 +1,7 @@
 ﻿using BattleGame.Shared.Common;
 using BattleGame.TournamentService.Dtos;
 using BattleGame.TournamentService.Entities;
-using BattleGame.TournamentService.Repositories.WriteRepositories.Interfaces;
+using BattleGame.TournamentService.Repositories.Interfaces;
 using MassTransit;
 using MediatR;
 

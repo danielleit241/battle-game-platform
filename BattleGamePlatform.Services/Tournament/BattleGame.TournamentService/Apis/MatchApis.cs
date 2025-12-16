@@ -15,9 +15,6 @@ namespace BattleGame.TournamentService.Apis
 
         public static RouteGroupBuilder MapMatchApi(this RouteGroupBuilder group)
         {
-            group.MapGet("/{tournamentId:guid}/matches", GetMatchesAsync)
-                .WithName("Get matches for tournament");
-
             group.MapPut("/{tournamentId:guid}/matches/{matchId:guid}/start", EndMatchesAsync)
                 .WithName("Get match details");
 

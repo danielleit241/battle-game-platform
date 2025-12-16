@@ -15,8 +15,8 @@ namespace BattleGame.TournamentService
                 Description = tournament.Description,
                 MaxParticipants = tournament.MaxParticipants,
                 GameId = tournament.GameId,
-                Status = (int)tournament.Status,
-                Format = (int)tournament.Format,
+                Status = (IntergrationEvents.TournamentStatus)tournament.Status,
+                Format = (IntergrationEvents.TournamentFormat)tournament.Format,
                 StartDate = tournament.StartDate,
                 EndDate = tournament.EndDate
             };
@@ -29,8 +29,35 @@ namespace BattleGame.TournamentService
                 Id = round.Id,
                 TournamentId = round.TournamentId,
                 RoundNumber = round.RoundNumber,
+                Status = (IntergrationEvents.TournamentRoundStatus)round.Status,
                 CreatedAt = round.CreatedAt,
                 UpdatedAt = round.UpdatedAt
+            };
+        }
+
+        public static CreatedParticipantIntergrationEvent AsParticipantCreatedEvent(this TournamentParticipant participant)
+        {
+            return new CreatedParticipantIntergrationEvent
+            {
+                Id = participant.Id,
+                ParticipantName = participant.ParticipantName,
+                TournamentId = participant.TournamentId,
+                CreatedAt = participant.CreatedAt,
+                UpdatedAt = participant.UpdatedAt
+            };
+        }
+
+        public static CreatedMatchIntergrationEvent AsMatchCreatedEvent(this TournamentMatch match)
+        {
+            return new CreatedMatchIntergrationEvent
+            {
+                Id = match.Id,
+                RoundId = match.RoundId,
+                Player1Id = match.Player1Id,
+                Player2Id = match.Player2Id,
+                WinnerId = match.WinnerId,
+                CreatedAt = match.CreatedAt,
+                UpdatedAt = match.UpdatedAt
             };
         }
 
@@ -46,7 +73,7 @@ namespace BattleGame.TournamentService
                 Format = dto.Format,
                 StartDate = dto.StartDate,
                 EndDate = dto.EndDate,
-                Status = TournamentStatus.Upcoming,
+                Status = Entities.TournamentStatus.Upcoming,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -78,32 +105,6 @@ namespace BattleGame.TournamentService
                 TournamentId = tournamentId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
-            };
-        }
-
-        public static CreatedParticipantIntergrationEvent AsParticipantCreatedEvent(this TournamentParticipant participant)
-        {
-            return new CreatedParticipantIntergrationEvent
-            {
-                Id = participant.Id,
-                ParticipantName = participant.ParticipantName,
-                TournamentId = participant.TournamentId,
-                CreatedAt = participant.CreatedAt,
-                UpdatedAt = participant.UpdatedAt
-            };
-        }
-
-        public static CreatedMatchIntergrationEvent AsMatchCreatedEvent(this TournamentMatch match)
-        {
-            return new CreatedMatchIntergrationEvent
-            {
-                Id = match.Id,
-                RoundId = match.RoundId,
-                Player1Id = match.Player1Id,
-                Player2Id = match.Player2Id,
-                WinnerId = match.WinnerId,
-                CreatedAt = match.CreatedAt,
-                UpdatedAt = match.UpdatedAt
             };
         }
     }
