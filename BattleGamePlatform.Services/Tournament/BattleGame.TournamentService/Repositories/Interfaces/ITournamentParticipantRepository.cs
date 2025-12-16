@@ -3,7 +3,7 @@ using BattleGame.TournamentService.Entities;
 
 namespace BattleGame.TournamentService.Repositories.Interfaces
 {
-    public interface ITournamentParticipantWriteRepository : IBaseRepository<TournamentParticipant>
+    public interface ITournamentParticipantRepository : IBaseRepository<TournamentParticipant>
     {
         Task<bool> IsEnoughParticipantInTournament(Guid tournamentId, int maxParticipants);
     }

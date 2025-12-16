@@ -18,6 +18,7 @@
     <Project Path="BattleGamePlatform.Services/Match/BattleGame.MatchService/BattleGame.MatchService.csproj" />
   </Folder>
   <Folder Name="/src/Tournament/">
+    <Project Path="BattleGamePlatform.Services/Tournament/BattleGame.TournamentHistoryService/BattleGame.TournamentHistoryService.csproj" />
     <Project Path="BattleGamePlatform.Services/Tournament/BattleGame.TournamentService.IntergrationEvents/BattleGame.TournamentService.IntergrationEvents.csproj" Id="40d02511-1fc0-4701-b4e8-e829aa5be2d7" />
     <Project Path="BattleGamePlatform.Services/Tournament/BattleGame.TournamentService/BattleGame.TournamentService.csproj" />
   </Folder>

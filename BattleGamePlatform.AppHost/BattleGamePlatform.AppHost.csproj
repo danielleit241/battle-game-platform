@@ -4,21 +4,21 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>453efb3e-b7ab-4008-b4fc-6ac8b687a1c5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.1" />
-    <PackageReference Include="Aspire.Hosting.Elasticsearch" Version="9.5.0" />
-    <PackageReference Include="Aspire.Hosting.MongoDB" Version="9.5.1" />
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.5.1" />
-    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.5.1" />
-    <PackageReference Include="Aspire.Hosting.Redis" Version="9.5.1" />
-	<PackageReference Include="Aspire.Hosting.Yarp" Version="9.5.0-preview.1.25474.7" />
-	<PackageReference Include="Scalar.Aspire" Version="0.5.3" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.Elasticsearch" Version="13.0.0" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.0.2" />
+	<PackageReference Include="Aspire.Hosting.Yarp" Version="13.0.2" />
+	<PackageReference Include="Scalar.Aspire" Version="0.8.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +26,7 @@
     <ProjectReference Include="..\BattleGamePlatform.Services\Game\BattleGame.GameService\BattleGame.GameService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\Leaderboard\BattleGame.LeaderboardService\BattleGame.LeaderboardService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\Match\BattleGame.MatchService\BattleGame.MatchService.csproj" />
+    <ProjectReference Include="..\BattleGamePlatform.Services\Tournament\BattleGame.TournamentHistoryService\BattleGame.TournamentHistoryService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\Tournament\BattleGame.TournamentService\BattleGame.TournamentService.csproj" />
     <ProjectReference Include="..\BattleGamePlatform.Services\User\BattleGame.UserService\BattleGame.UserService.csproj" />
   </ItemGroup>

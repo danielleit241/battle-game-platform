@@ -11,19 +11,19 @@ namespace BattleGame.TournamentService.CQRSServices.Tournament.Command
     public class RegisterTournamentHandler : IRequestHandler<RegisterTournamentCommand, ApiResponse<TournamentDto>>
     {
         private readonly ILogger<RegisterTournamentHandler> _logger;
-        private readonly ITournamentWriteRepository _tournament;
-        private readonly ITournamentRoundWriteRepository _round;
-        private readonly ITournamentMatchWriteRepository _match;
-        private readonly ITournamentParticipantWriteRepository _participant;
+        private readonly ITournamentRepository _tournament;
+        private readonly ITournamentRoundRepository _round;
+        private readonly ITournamentMatchRepository _match;
+        private readonly ITournamentParticipantRepository _participant;
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly Queue<RegisterTournamentDto> _tournamentQueue = new();
 
         public RegisterTournamentHandler(
             ILogger<RegisterTournamentHandler> logger,
-            ITournamentWriteRepository tournamentWriteRepository,
-            ITournamentRoundWriteRepository tournamentRoundWriteRepository,
-            ITournamentMatchWriteRepository tournamentMatchWriteRepository,
-            ITournamentParticipantWriteRepository tournamentParticipantWriteRepository,
+            ITournamentRepository tournamentWriteRepository,
+            ITournamentRoundRepository tournamentRoundWriteRepository,
+            ITournamentMatchRepository tournamentMatchWriteRepository,
+            ITournamentParticipantRepository tournamentParticipantWriteRepository,
             IPublishEndpoint publishEndpoint)
         {
             _logger = logger;

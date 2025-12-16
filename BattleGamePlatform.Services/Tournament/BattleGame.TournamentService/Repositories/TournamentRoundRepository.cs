@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BattleGame.TournamentService.Repositories
 {
-    public class TournamentRoundWriteRepository : PostgresRepository<TournamentRound>, ITournamentRoundWriteRepository
+    public class TournamentRoundRepository : PostgresRepository<TournamentRound>, ITournamentRoundRepository
     {
-        public TournamentRoundWriteRepository(TournamentWriteDbContext context) : base(context)
+        public TournamentRoundRepository(TournamentWriteDbContext context) : base(context)
         {
         }
 

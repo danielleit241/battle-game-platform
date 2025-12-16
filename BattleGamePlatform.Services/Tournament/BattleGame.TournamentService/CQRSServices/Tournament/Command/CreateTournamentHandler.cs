@@ -10,13 +10,13 @@ namespace BattleGame.TournamentService.CQRSServices.Tournament.Command
     public class CreateTournamentHandler : IRequestHandler<CreateTournamentCommand, ApiResponse<TournamentDto>>
     {
         private readonly ILogger<CreateTournamentHandler> _logger;
-        private readonly ITournamentWriteRepository _tournamentWriteRepository;
-        private readonly ITournamentRoundWriteRepository _tournamentRoundWriteRepository;
+        private readonly ITournamentRepository _tournamentWriteRepository;
+        private readonly ITournamentRoundRepository _tournamentRoundWriteRepository;
         private readonly IPublishEndpoint _publishEndpoint;
 
         public CreateTournamentHandler(ILogger<CreateTournamentHandler> logger,
-            ITournamentWriteRepository tournamentWriteRepository,
-            ITournamentRoundWriteRepository tournamentRoundWriteRepository,
+            ITournamentRepository tournamentWriteRepository,
+            ITournamentRoundRepository tournamentRoundWriteRepository,
             IPublishEndpoint publishEndpoint)
         {
             _logger = logger;

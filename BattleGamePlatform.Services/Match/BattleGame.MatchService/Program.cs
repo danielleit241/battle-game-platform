@@ -1,3 +1,5 @@
+using BattleGame.MatchService.Apis;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();

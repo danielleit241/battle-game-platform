@@ -3,7 +3,7 @@ using BattleGame.TournamentService.Entities;
 
 namespace BattleGame.TournamentService.Repositories.Interfaces
 {
-    public interface ITournamentRoundWriteRepository : IBaseRepository<TournamentRound>
+    public interface ITournamentRoundRepository : IBaseRepository<TournamentRound>
     {
         Task<IEnumerable<TournamentRound>> GenerateRoundsForTournamentAsync(Guid tournamentId, int maxParticipants);
         Task<TournamentRound> GetRoundIsNotCompletedMatchesByTournamentId(Guid tournamentId);

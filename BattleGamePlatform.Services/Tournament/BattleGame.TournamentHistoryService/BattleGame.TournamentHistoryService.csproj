@@ -9,23 +9,21 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BattleGamePlatform.DatabaseMigrationHelpers\BattleGamePlatform.DatabaseMigrationHelpers.csproj" />
     <ProjectReference Include="..\..\..\BattleGamePlatform.ServiceDefaults\BattleGamePlatform.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.MassageBus\BattleGame.MessageBus.csproj" />
     <ProjectReference Include="..\..\..\BattleGamePlatform.Utils\BattleGame.Shared\BattleGame.Shared.csproj" />
     <ProjectReference Include="..\BattleGame.TournamentService.IntergrationEvents\BattleGame.TournamentService.IntergrationEvents.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Apis\" />
+    <Folder Include="Boostrapping\" />
+    <Folder Include="Consumers\" />
+    <Folder Include="CQRSServices\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>

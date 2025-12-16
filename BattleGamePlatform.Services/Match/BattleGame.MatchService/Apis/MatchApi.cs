@@ -1,4 +1,4 @@
-﻿namespace BattleGame.MatchService.Api
+﻿namespace BattleGame.MatchService.Apis
 {
     public static class MatchApi
     {

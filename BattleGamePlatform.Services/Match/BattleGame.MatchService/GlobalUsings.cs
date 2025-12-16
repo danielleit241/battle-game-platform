@@ -1,4 +1,4 @@
-﻿global using BattleGame.MatchService.Api;
+﻿global using BattleGame.MatchService.Apis;
 global using BattleGame.MatchService.Clients;
 global using BattleGame.MatchService.Consumers;
 global using BattleGame.MatchService.Dtos;

@@ -1,4 +1,4 @@
-using BattleGamePlatform.TestHost;
+using BattleGame.TestHost;
 
 var builder = DistributedApplication.CreateBuilder(args);
 

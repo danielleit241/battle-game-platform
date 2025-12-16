@@ -1,6 +1,6 @@
 ﻿using Aspire.Hosting.Yarp;
 
-namespace BattleGamePlatform.TestHost
+namespace BattleGame.TestHost
 {
     public static class ExternalServiceRegistrationExtensions
     {

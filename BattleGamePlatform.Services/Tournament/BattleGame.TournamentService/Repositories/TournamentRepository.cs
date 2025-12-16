@@ -5,9 +5,9 @@ using BattleGame.TournamentService.Repositories.Interfaces;
 
 namespace BattleGame.TournamentService.Repositories
 {
-    public class TournamentWriteRepository : PostgresRepository<Tournament>, ITournamentWriteRepository
+    public class TournamentRepository : PostgresRepository<Tournament>, ITournamentRepository
     {
-        public TournamentWriteRepository(TournamentWriteDbContext context) : base(context)
+        public TournamentRepository(TournamentWriteDbContext context) : base(context)
         {
         }
     }

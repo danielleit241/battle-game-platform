@@ -14,7 +14,7 @@
         {
             var key = LeaderboardKey + gameId;
             var results = await _database.SortedSetRangeByRankWithScoresAsync(key, 0, top - 1, Order.Descending);
-            return results.Select(r => (Guid.Parse(r.Element!), r.Score)).ToList();
+            return results.Select(r => (Guid.Parse((string)r.Element!), r.Score)).ToList();
         }
 
         public async Task UpdateScoreAsync(Guid gameId, Guid userId, int score)

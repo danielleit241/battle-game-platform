@@ -3,7 +3,7 @@ using BattleGame.TournamentService.Entities;
 
 namespace BattleGame.TournamentService.Repositories.Interfaces
 {
-    public interface ITournamentWriteRepository : IBaseRepository<Tournament>
+    public interface ITournamentRepository : IBaseRepository<Tournament>
     {
     }
 }
