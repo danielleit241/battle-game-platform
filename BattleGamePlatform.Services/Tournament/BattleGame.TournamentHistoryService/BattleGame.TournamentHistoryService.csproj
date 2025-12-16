@@ -19,11 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Apis\" />
     <Folder Include="Boostrapping\" />
-    <Folder Include="Consumers\" />
-    <Folder Include="CQRSServices\" />
-    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>
