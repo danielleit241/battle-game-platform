@@ -10,6 +10,14 @@
         public DateTime UpdatedAt { get; set; }
     }
 
+    public class RoundCompletedIntergrationEvent
+    {
+        public Guid RoundId { get; set; }
+        public Guid TournamentId { get; set; }
+        public int RoundNumber { get; set; }
+        public DateTime CompletedAt { get; set; }
+    }
+
     public enum TournamentRoundStatus
     {
         Pending,

@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 builder.AddRateLimit();
-builder.AddNpgsqlDb<TournamentWriteDbContext>(Const.TournamentDatabase + "Write");
+builder.AddNpgsqlDb<TournamentWriteDbContext>(Const.TournamentDatabase + "-write");
 builder.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();

@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 builder.AddServiceDefaults();
 builder.AddRateLimit();
-builder.AddMongoDb(Const.TournamentDatabase + "Read");
+builder.AddMongoDb(Const.TournamentDatabase + "-read");
 builder.Services.AddMassTransitWithRabbitMq(builder.Configuration);
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
 builder.Services.AddScoped<ITournamentParticipantRepository, TournamentParticipantRepository>();

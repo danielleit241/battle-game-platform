@@ -68,19 +68,19 @@ namespace BattleGame.TournamentHistoryService
             return match;
         }
 
-        public static TournamentSnapshotDto ToDto(this Tournament snapshot, IEnumerable<TournamentParticipant> participants, IEnumerable<TournamentRound> rounds, IEnumerable<TournamentMatch> matchs)
+        public static TournamentSnapshotDto ToDto(this Tournament tournament, IEnumerable<TournamentParticipant> participants, IEnumerable<TournamentRound> rounds, IEnumerable<TournamentMatch> matches)
         {
             return new TournamentSnapshotDto
             {
-                Id = snapshot.Id,
-                Name = snapshot.Name,
-                Description = snapshot.Description,
-                MaxParticipants = snapshot.MaxParticipants,
-                GameId = snapshot.GameId,
-                Status = snapshot.Status,
-                Format = snapshot.Format,
-                StartDate = snapshot.StartDate,
-                EndDate = snapshot.EndDate,
+                Id = tournament.Id,
+                Name = tournament.Name,
+                Description = tournament.Description,
+                MaxParticipants = tournament.MaxParticipants,
+                GameId = tournament.GameId,
+                Status = tournament.Status,
+                Format = tournament.Format,
+                StartDate = tournament.StartDate,
+                EndDate = tournament.EndDate,
                 Participants = [.. participants.Select(p => new ParticipantDto
                 {
                     ParticipantName = p.ParticipantName,
@@ -90,14 +90,17 @@ namespace BattleGame.TournamentHistoryService
                 {
                     RoundNumber = r.RoundNumber,
                     Status = r.Status,
-                    Matches = [.. matchs.Select(m => new MatchDto
-                    {
-                        Player1Id = m.Player1Id,
-                        Player2Id = m.Player2Id,
-                        WinnerId = m.WinnerId
-                    })]
+                    Matches = [.. matches
+                        .Where(m => m.RoundId == r.Id)
+                        .Select(m => new MatchDto
+                        {
+                            Player1Id = m.Player1Id,
+                            Player2Id = m.Player2Id,
+                            WinnerId = m.WinnerId
+                        })]
                 })]
             };
         }
     }
 }
+

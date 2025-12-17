@@ -6,6 +6,17 @@ namespace BattleGame.TournamentService
 {
     public static class MappingExtensions
     {
+        public static MatchCompleteDto AsMatchCompleteDto(this TournamentMatch match)
+        {
+            return new MatchCompleteDto
+            (
+                MatchId: match.Id,
+                TournamentId: match.Round.TournamentId,
+                WinnerId: match.WinnerId ?? Guid.Empty,
+                CompletedAt: DateTime.UtcNow
+            );
+        }
+
         public static CreatedTournamentIntergrationEvent AsTournamentCreatedEvent(this Tournament tournament)
         {
             return new CreatedTournamentIntergrationEvent
@@ -35,6 +46,17 @@ namespace BattleGame.TournamentService
             };
         }
 
+        public static RoundCompletedIntergrationEvent AsRoundCompletedEvent(this TournamentRound round)
+        {
+            return new RoundCompletedIntergrationEvent
+            {
+                RoundId = round.Id,
+                TournamentId = round.TournamentId,
+                RoundNumber = round.RoundNumber,
+                CompletedAt = DateTime.UtcNow
+            };
+        }
+
         public static CreatedParticipantIntergrationEvent AsParticipantCreatedEvent(this TournamentParticipant participant)
         {
             return new CreatedParticipantIntergrationEvent
@@ -58,6 +80,18 @@ namespace BattleGame.TournamentService
                 WinnerId = match.WinnerId,
                 CreatedAt = match.CreatedAt,
                 UpdatedAt = match.UpdatedAt
+            };
+        }
+
+        public static MatchCompletedIntergrationEvent AsMatchCompletedEvent(this TournamentMatch match, Guid tournamentId)
+        {
+            return new MatchCompletedIntergrationEvent
+            {
+                MatchId = match.Id,
+                RoundId = match.RoundId,
+                TournamentId = tournamentId,
+                WinnerId = match.WinnerId ?? Guid.Empty,
+                CompletedAt = DateTime.UtcNow
             };
         }
 

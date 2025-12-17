@@ -1,5 +1,9 @@
 ﻿namespace BattleGame.TournamentService.Dtos
 {
-    public record StartMatchDto(Guid MatchId);
-    public record EndMatchDto(Guid MatchId, Guid WinnerId);
+    public class MatchCompleteDto(
+            Guid MatchId,
+            Guid TournamentId,
+            Guid WinnerId,
+            DateTime CompletedAt
+        );
 }

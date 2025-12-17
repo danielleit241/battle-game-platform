@@ -42,6 +42,8 @@
             var gamedb = postgres.AddDatabase("gameservice", "gamedb");
             var matchdb = mongo.AddDatabase("matchservice", "matchdb");
             var leaderboarddb = mongo.AddDatabase("leaderboardservice", "leaderboarddb");
+            var tournamentWriteDb = postgres.AddDatabase("tournamentservice-write", "tournamentwritedb");
+            var tournamentReadDb = mongo.AddDatabase("tournamentservice-read", "tournamentreaddb");
 
             var userservice = builder.AddProject<Projects.BattleGame_UserService>("battlegame-userservice")
                 .WithReference(userdb)
@@ -76,8 +78,8 @@
                 .WaitFor(rabbitMq);
 
             var tournamentService = builder.AddProject<Projects.BattleGame_TournamentService>("battlegame-tournamentservice")
-                .WithReference(postgres)
-                .WithReference(mongo)
+                .WithReference(tournamentWriteDb)
+                .WithReference(tournamentReadDb)
                 .WithReference(rabbitMq)
                 .WaitFor(postgres)
                 .WaitFor(mongo)

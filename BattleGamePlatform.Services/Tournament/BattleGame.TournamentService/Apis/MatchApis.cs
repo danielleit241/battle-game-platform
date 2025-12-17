@@ -1,4 +1,6 @@
-﻿
+﻿using BattleGame.TournamentService.CQRSServices.Match.Command;
+using MediatR;
+
 namespace BattleGame.TournamentService.Apis
 {
     public static class MatchApis
@@ -15,23 +17,17 @@ namespace BattleGame.TournamentService.Apis
 
         public static RouteGroupBuilder MapMatchApi(this RouteGroupBuilder group)
         {
-            group.MapPut("/{tournamentId:guid}/matches/{matchId:guid}/start", EndMatchesAsync)
-                .WithName("Get match details");
-
-            group.MapPut("/{tournamentId:guid}/matches/{matchId:guid}/end", EndMatchesAsync)
-                .WithName("Get match details");
+            group.MapPut("/{tournamentId:guid}/matches/{matchId:guid}/start", StartMatchesAsync)
+                .WithName("Start match");
 
             return group;
         }
 
-        private static async Task EndMatchesAsync(HttpContext context)
+        private static async Task<IResult> StartMatchesAsync(Guid tournamentId, Guid matchId, IMediator mediator)
         {
-            throw new NotImplementedException();
-        }
-
-        private static async Task GetMatchesAsync(HttpContext context)
-        {
-            throw new NotImplementedException();
+            var command = new StartMatchCommand(tournamentId, matchId);
+            var result = await mediator.Send(command);
+            return TypedResults.Ok(result);
         }
     }
 }
