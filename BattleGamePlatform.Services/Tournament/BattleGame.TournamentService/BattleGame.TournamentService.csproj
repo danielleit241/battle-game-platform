@@ -28,4 +28,8 @@
     <ProjectReference Include="..\BattleGame.TournamentService.IntergrationEvents\BattleGame.TournamentService.IntergrationEvents.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
